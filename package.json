@@ -1,0 +1,19 @@
+{
+  "name": "toplan",
+  "version": "1.0.0",
+  "description": "Gather people around a certain topic or plan and gather up. Toplan!",
+  "main": "server.js",
+  "scripts": {
+    "dev": "nodemon server.js",
+    "start": "node server.js"
+  },
+  "author": "Kaan Serin",
+  "license": "ISC",
+  "dependencies": {
+    "dotenv": "^8.2.0",
+    "express": "^4.17.1",
+    "express-validator": "^6.6.1",
+    "mongoose": "^5.10.14",
+    "pg": "^8.5.1"
+  }
+}
