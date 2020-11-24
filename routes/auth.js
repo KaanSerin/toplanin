@@ -1,6 +1,6 @@
 const express = require('express');
 const { check } = require('express-validator');
-const { register } = require('../controllers/auth');
+const { register, loginUser } = require('../controllers/auth');
 
 const router = express.Router();
 
@@ -17,5 +17,16 @@ router
     ],
     register
   );
+
+router.post(
+  '/login',
+  [
+    check('email', 'Please provide a valid address').isEmail(),
+    check('password', 'Please provide a password that is at least 6 characters')
+      .not()
+      .isEmpty(),
+  ],
+  loginUser
+);
 
 module.exports = router;
