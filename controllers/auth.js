@@ -2,6 +2,7 @@ const { validationResult } = require('express-validator');
 const db = require('../config/db');
 const bcrypt = require('bcrypt');
 const jwt = require('jsonwebtoken');
+const { sendMail } = require('../utility/mail');
 
 /**
  * @desc    Register Uer
@@ -43,7 +44,10 @@ exports.register = async (req, res) => {
         process.env.JWT_SECRET
       );
 
-      return res.status(200).json({ success: true, token: token });
+      res.cookie('auth', token);
+
+      sendMail('a@gmail.com', 'Hello!');
+      return res.status(200).json({ success: true });
     }
   );
 };
@@ -53,7 +57,6 @@ exports.register = async (req, res) => {
  * @route   POST /api/auth/login
  * @access  Public
  */
-
 exports.loginUser = async (req, res) => {
   const errors = validationResult(req);
 
@@ -85,10 +88,25 @@ exports.loginUser = async (req, res) => {
           process.env.JWT_SECRET
         );
 
+        res.cookie('auth', token);
+
         return res.status(200).json({ success: true, token: token });
       } else {
         return res.status(404).json({ msg: 'Invalid username or password' });
       }
     }
   );
+};
+
+/**
+ * @desc    Logout Uer
+ * @route   POST /api/auth/logout
+ * @access  Private
+ */
+exports.logout = (req, res) => {
+  if (!req.cookies.auth) {
+    return res.status(400).json({ success: false });
+  }
+  res.cookie('auth', '', { maxAge: 0 });
+  res.status(200).json({ success: true });
 };

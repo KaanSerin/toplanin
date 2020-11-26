@@ -1,5 +1,6 @@
 const express = require('express');
 const dotenv = require('dotenv');
+const cookieParser = require('cookie-parser');
 
 // Importing routes
 const auth = require('./routes/auth');
@@ -10,8 +11,11 @@ const app = express();
 // Load Environment Variables
 dotenv.config({ path: './config/config.env' });
 
-// Express Bodyparser
+// Express Middleware
+// Body Parser
 app.use(express.json());
+// Cookie Parser
+app.use(cookieParser(process.env.COOKIE_SECRET));
 
 // Mounting Routes
 app.use('/api/auth', auth);
