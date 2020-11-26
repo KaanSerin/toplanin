@@ -1,6 +1,11 @@
 const express = require('express');
 const { check } = require('express-validator');
-const { register, loginUser, logout } = require('../controllers/auth');
+const {
+  register,
+  loginUser,
+  logout,
+  completeRegistration,
+} = require('../controllers/auth');
 
 const router = express.Router();
 
@@ -17,6 +22,8 @@ router
     ],
     register
   );
+
+router.get('/register/confirm/:token', completeRegistration);
 
 router.post(
   '/login',

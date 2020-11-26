@@ -46,7 +46,7 @@ exports.register = async (req, res) => {
 
       res.cookie('auth', token);
 
-      sendMail('a@gmail.com', 'Hello!');
+      sendMail(email, token);
       return res.status(200).json({ success: true });
     }
   );
@@ -93,6 +93,50 @@ exports.loginUser = async (req, res) => {
         return res.status(200).json({ success: true, token: token });
       } else {
         return res.status(404).json({ msg: 'Invalid username or password' });
+      }
+    }
+  );
+};
+
+/**
+ * @desc    Complete Registration
+ * @route   GET /api/register/:token
+ * @access  Public
+ */
+exports.completeRegistration = (req, res) => {
+  const token = req.params.token;
+
+  const tokenParsed = jwt.verify(token, process.env.JWT_SECRET);
+  console.log(tokenParsed);
+
+  db.query(
+    {
+      text: `SELECT user_id, name, confirmed, password FROM users WHERE user_id = '${tokenParsed.user_id}'`,
+    },
+    (err, data) => {
+      if (err) {
+        return res.status(500).json({ error: err });
+      }
+      if (data.rows.length == 0) {
+        return res.status(400).json({ msg: 'Bad Request' });
+      }
+
+      // passwords match it's all good
+      if (data.rows[0].confirmed === true) {
+        return res.status(400).json({ msg: 'Bad Request' });
+      } else {
+        // God forgive me for what I'm doing here...
+        db.query(
+          {
+            text: `UPDATE users SET confirmed = 'true' WHERE user_id = '${tokenParsed.user_id}'`,
+          },
+          (err, data) => {
+            if (err) {
+              return res.status(500).json({ error: err });
+            }
+            return res.status(200).json({ success: true });
+          }
+        );
       }
     }
   );

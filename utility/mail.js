@@ -1,8 +1,7 @@
 const nodemailer = require('nodemailer');
 
-exports.sendMail = async (emailTo, content) => {
+exports.sendMail = async (emailTo, token) => {
   console.log(process.env.EMAIL);
-  return;
   const transporter = nodemailer.createTransport({
     service: 'gmail',
     host: 'smtp.gmail.com',
@@ -16,7 +15,8 @@ exports.sendMail = async (emailTo, content) => {
     from: process.env.EMAIL,
     to: emailTo,
     subject: 'Confirm Account',
-    text: content,
+    text: 'Confirm Your Account!',
+    html: `<a href="http://localhost:3000/api/auth/register/confirm/${token}">Click to confirm your account</a>`,
   };
 
   await transporter.sendMail(mailOptions, function (error, info) {
