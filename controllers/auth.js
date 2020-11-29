@@ -103,7 +103,7 @@ exports.loginUser = async (req, res) => {
  * @route   GET /api/register/:token
  * @access  Public
  */
-exports.completeRegistration = (req, res) => {
+exports.confirmAccount = (req, res) => {
   const token = req.params.token;
 
   const tokenParsed = jwt.verify(token, process.env.JWT_SECRET);
@@ -117,11 +117,12 @@ exports.completeRegistration = (req, res) => {
       if (err) {
         return res.status(500).json({ error: err });
       }
+      // user not found
       if (data.rows.length == 0) {
         return res.status(400).json({ msg: 'Bad Request' });
       }
 
-      // passwords match it's all good
+      // if the account is already confirmed
       if (data.rows[0].confirmed === true) {
         return res.status(400).json({ msg: 'Bad Request' });
       } else {
@@ -153,4 +154,69 @@ exports.logout = (req, res) => {
   }
   res.cookie('auth', '', { maxAge: 0 });
   res.status(200).json({ success: true });
+};
+
+/**
+ * @desc    Initial Setup User Account Details
+ * @route   POST /api/auth/complete
+ * @access  Private
+ */
+exports.completeRegistration = async (req, res) => {
+  const errors = validationResult(req);
+
+  const { reason, interests, groups } = req.body;
+
+  console.log(reason, interests, groups);
+
+  if (errors.errors.length > 0) {
+    return res.status(400).json({ errors: errors.array() });
+  }
+
+  const token = req.cookies.auth;
+
+  if (!token) {
+    return res.status(400).json({ success: false });
+  }
+
+  const tokenParsed = jwt.verify(token, process.env.JWT_SECRET);
+  console.log(tokenParsed);
+
+  db.query(
+    {
+      text: `SELECT user_id, name, confirmed, completed, password FROM users WHERE user_id = '${tokenParsed.user_id}'`,
+    },
+    (err, data) => {
+      if (err) {
+        return res.status(500).json({ success: false, error: err });
+      }
+      // user not found
+      if (data.rows.length == 0) {
+        return res.status(400).json({ success: false, error: 'Bad Request' });
+      }
+
+      // if the account is not confirmed
+      if (data.rows[0].confirmed !== true) {
+        return res.status(400).json({ success: false, error: 'Bad Request' });
+      }
+
+      // if the account is already confirmed
+      if (data.rows[0].completed === true) {
+        return res.status(400).json({ success: false, error: 'Bad Request' });
+      } else {
+        // God forgive me for what I'm doing here...
+        db.query(
+          {
+            text: `UPDATE users SET completed = 'true', reason_join = '${reason}', interests = '${interests}', groups = '${groups}' WHERE user_id = '${tokenParsed.user_id}'`,
+          },
+          (err, data) => {
+            if (err) {
+              console.log(err);
+              return res.status(500).json({ success: false, error: err });
+            }
+            return res.status(200).json({ success: true });
+          }
+        );
+      }
+    }
+  );
 };

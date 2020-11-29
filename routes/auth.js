@@ -5,6 +5,7 @@ const {
   loginUser,
   logout,
   completeRegistration,
+  confirmAccount,
 } = require('../controllers/auth');
 
 const router = express.Router();
@@ -23,7 +24,21 @@ router
     register
   );
 
-router.get('/register/confirm/:token', completeRegistration);
+router.get('/register/confirm/:token', confirmAccount);
+
+router.post(
+  '/register/complete',
+  [
+    check('reason', 'Please provide a reason for joining').not().isEmpty(),
+    check('interests', 'Please provide at least 3 interests').isArray({
+      min: 3,
+    }),
+    check('groups', 'Please select at least one group to join').isArray({
+      min: 1,
+    }),
+  ],
+  completeRegistration
+);
 
 router.post(
   '/login',
