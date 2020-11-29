@@ -1,6 +1,7 @@
 const express = require('express');
 const dotenv = require('dotenv');
 const cookieParser = require('cookie-parser');
+const fileUpload = require('express-fileupload');
 
 // Importing routes
 const auth = require('./routes/auth');
@@ -12,6 +13,9 @@ const app = express();
 dotenv.config({ path: './config/config.env' });
 
 // Express Middleware
+// File Upload
+app.use(fileUpload());
+
 // Body Parser
 app.use(express.json());
 // Cookie Parser
