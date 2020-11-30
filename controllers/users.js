@@ -17,7 +17,7 @@ exports.getAllUsers = async (req, res) => {
 
 /**
  * @desc    Update User Avatar
- * @route   POST /api/users/:id/avatar
+ * @route   POST /api/users/avatar
  * @access  Public
  */
 exports.updateAvatar = async (req, res) => {
@@ -48,7 +48,6 @@ exports.updateAvatar = async (req, res) => {
   }
 
   const avatar64 = Buffer.from(avatarByte.data).toString('base64');
-  console.log(avatarByte);
 
   db.query(
     {
