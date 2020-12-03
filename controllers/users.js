@@ -6,13 +6,9 @@ const db = require('../config/db');
  * @access  Public
  */
 exports.getAllUsers = async (req, res) => {
-  let users = await db.query({
-    text: 'SELECT * FROM users;',
-  });
+  const { rows } = await db.query('SELECT * FROM users;');
 
-  users = users.rows;
-
-  res.status(200).json({ success: true, users });
+  res.status(200).json({ success: true, users: rows });
 };
 
 /**
@@ -21,18 +17,6 @@ exports.getAllUsers = async (req, res) => {
  * @access  Public
  */
 exports.updateAvatar = async (req, res) => {
-  let users = await db.query({
-    text: 'SELECT * FROM users;',
-  });
-
-  if (!users) {
-    users = users.rows;
-  }
-
-  if (users.length == 0) {
-    return res.status(404).json({ success: false, error: 'User Not Found' });
-  }
-
   const avatarByte = req.files.avatar;
 
   if (!avatarByte) {
@@ -49,16 +33,65 @@ exports.updateAvatar = async (req, res) => {
 
   const avatar64 = Buffer.from(avatarByte.data).toString('base64');
 
-  db.query(
-    {
-      text: `UPDATE user_avatars SET avatar = '${avatar64}'`,
-    },
-    (err, data) => {
-      if (err) {
-        console.log(err);
-        return res.status(500).json({ success: false, error: err });
-      }
-      return res.status(200).json({ success: true });
+  try {
+    const { rows } = await db.query(
+      `UPDATE user_avatars SET avatar = '${avatar64}' WHERE user_id = '${req.user.user_id}'`
+    );
+    return res.status(200).json({ success: true });
+  } catch (error) {
+    console.log(error);
+    return res.status(500).json({ success: false, error });
+  }
+};
+
+/**
+ * @desc    Get User Info
+ * @route   GET /api/users/:id
+ * @access  Public
+ */
+exports.getUserInfoById = async (req, res) => {
+  const user_id = req.params.id;
+
+  try {
+    const { rows } = await db.query(
+      `SELECT name, bio, interests, groups, facebook, twitter, linkedin, confirmed, completed FROM users WHERE user_id = '${user_id}'`
+    );
+
+    console.log(rows);
+
+    if (rows.length === 0) {
+      return res
+        .status(404)
+        .json({ success: false, error: `User with id ${user_id} not found` });
     }
-  );
+
+    // user found but, if the account is not confirmed
+    if (rows[0].confirmed !== true) {
+      return res
+        .status(404)
+        .json({ success: false, error: `User with id ${user_id} not found` });
+    }
+
+    // user found but, if the account is not completed
+    if (rows[0].completed !== true) {
+      return res
+        .status(404)
+        .json({ success: false, error: `User with id ${user_id} not found` });
+    }
+
+    const data = await db.query(
+      `SELECT * from user_avatars WHERE user_id = '${user_id}'`
+    );
+
+    rows[0].avatar = data.rows[0].avatar;
+
+    // To not show these to in the response
+    rows[0].completed = undefined;
+    rows[0].confirmed = undefined;
+
+    return res.status(200).json({ success: true, user: rows[0] });
+  } catch (error) {
+    console.log(error);
+    return res.status(500).json({ success: false, error });
+  }
 };

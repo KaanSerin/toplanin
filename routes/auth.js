@@ -6,6 +6,8 @@ const {
   logout,
   completeRegistration,
   confirmAccount,
+  resetPassword,
+  forgotPassword,
 } = require('../controllers/auth');
 
 const router = express.Router();
@@ -23,9 +25,7 @@ router
     ],
     register
   );
-
 router.get('/register/confirm/:token', confirmAccount);
-
 router.post(
   '/register/complete',
   [
@@ -39,7 +39,6 @@ router.post(
   ],
   completeRegistration
 );
-
 router.post(
   '/login',
   [
@@ -50,7 +49,16 @@ router.post(
   ],
   loginUser
 );
-
 router.post('/logout', logout);
+router.post(
+  '/forgotpassword',
+  check('email', 'Please provide email').isEmail(),
+  forgotPassword
+);
+router.post(
+  '/resetpassword/:token',
+  check('password', 'Please provide new password').notEmpty(),
+  resetPassword
+);
 
 module.exports = router;
