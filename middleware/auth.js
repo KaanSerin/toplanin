@@ -21,8 +21,11 @@ exports.protect = async (req, res, next) => {
   const { user_id } = token;
 
   try {
-    const { rows } = await db.query(
-      `SELECT user_id, confirmed, completed FROM users WHERE user_id = '${user_id}'`
+    const {
+      rows,
+    } = await db.query(
+      'SELECT user_id, confirmed, completed FROM users WHERE user_id = $1',
+      [user_id]
     );
 
     // If the user_id in the cookie is not found in the database

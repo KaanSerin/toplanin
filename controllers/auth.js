@@ -35,8 +35,11 @@ exports.register = async (req, res) => {
 
   try {
     // TODO: Sanitize the req.body parameters
-    const { rows } = await db.query(
-      `INSERT INTO users(name, email, password, location) VALUES('${name}','${email}','${hashedPassword}','${location}') RETURNING user_id, name, email, location`
+    const {
+      rows,
+    } = await db.query(
+      'INSERT INTO users(name, email, password, location) VALUES($1, $2, $3, $4) RETURNING user_id, name, email, location',
+      [name, email, hashedPassword, location]
     );
 
     const token = jwt.sign(
@@ -74,8 +77,11 @@ exports.loginUser = async (req, res) => {
   const { email, password } = req.body;
 
   try {
-    const { rows } = await db.query(
-      `SELECT user_id, email, password FROM users WHERE email = '${email}'`
+    const {
+      rows,
+    } = await db.query(
+      'SELECT user_id, email, password FROM users WHERE email = $1',
+      [email]
     );
     if (rows.length == 0) {
       return res.status(404).json({ msg: 'Invalid username or password' });
@@ -114,8 +120,11 @@ exports.confirmAccount = async (req, res) => {
   console.log(tokenParsed);
 
   try {
-    const { rows } = await db.query(
-      `SELECT user_id, name, confirmed, password FROM users WHERE user_id = '${tokenParsed.user_id}'`
+    const {
+      rows,
+    } = await db.query(
+      'SELECT user_id, name, confirmed, password FROM users WHERE user_id = $1',
+      [tokenParsed.user_id]
     );
 
     // user not found
@@ -129,7 +138,8 @@ exports.confirmAccount = async (req, res) => {
     } else {
       // God forgive me for what I'm doing here...
       const data = await db.query(
-        `UPDATE users SET confirmed = 'true' WHERE user_id = '${tokenParsed.user_id}'`
+        "UPDATE users SET confirmed = 'true' WHERE user_id = $1",
+        [tokenParsed.user_id]
       );
       return res.status(200).json({ success: true });
     }
@@ -178,8 +188,11 @@ exports.completeRegistration = async (req, res) => {
   console.log(tokenParsed);
 
   try {
-    const { rows } = await db.query(
-      `SELECT user_id, name, confirmed, completed, password FROM users WHERE user_id = '${tokenParsed.user_id}'`
+    const {
+      rows,
+    } = await db.query(
+      'SELECT user_id, name, confirmed, completed, password FROM users WHERE user_id = $1',
+      [tokenParsed.user_id]
     );
 
     // user not found
@@ -197,7 +210,8 @@ exports.completeRegistration = async (req, res) => {
       return res.status(400).json({ success: false, error: 'Bad Request' });
     } else {
       const data = await db.query(
-        `UPDATE users SET completed = 'true', reason_join = '${reason}', interests = '${interests}', groups = '${groups}' WHERE user_id = '${tokenParsed.user_id}'`
+        "UPDATE users SET completed = 'true', reason_join = $1, interests = $2, groups = $3 WHERE user_id = $4",
+        [reason, interests, groups, tokenParsed.user_id]
       );
 
       return res.status(200).json({ success: true });
@@ -222,9 +236,9 @@ exports.forgotPassword = async (req, res) => {
   }
 
   try {
-    const { rows } = await db.query(
-      `SELECT * FROM users WHERE email = '${email}'`
-    );
+    const { rows } = await db.query('SELECT * FROM users WHERE email = $1', [
+      email,
+    ]);
 
     if (rows.length === 0) {
       return res.status(404).json({ error: { msg: 'User not found' } });
@@ -245,18 +259,21 @@ exports.forgotPassword = async (req, res) => {
     console.log(now);
 
     let data = await db.query(
-      `SELECT * FROM user_password_reset WHERE user_id = '${user_id}'`
+      'SELECT * FROM user_password_reset WHERE user_id = $1',
+      [user_id]
     );
     data = data.rows;
     if (data.length === 0) {
       const data = await db.query(
-        `INSERT INTO user_password_reset VALUES('${user_id}', '${hash}', '${now}')`
+        'INSERT INTO user_password_reset VALUES($1, $2, $3)',
+        [user_id, hash, now]
       ).rows;
 
       sendMail(email, 'Reset Password', 'auth/resetpassword/', webtoken);
     } else {
       const data = await db.query(
-        `UPDATE user_password_reset SET reset_token = '${hash}', reset_token_expire = '${now}' WHERE user_id = '${user_id}'`
+        'UPDATE user_password_reset SET reset_token = $1, reset_token_expire = $now WHERE user_id = $3',
+        [hash, now, user_id]
       ).rows;
 
       sendMail(email, 'Reset Password', 'auth/resetpassword', webtoken);
@@ -291,7 +308,8 @@ exports.resetPassword = async (req, res) => {
 
   try {
     let user_password_reset = await db.query(
-      `SELECT * FROM user_password_reset WHERE user_id = '${user_id}'`
+      'SELECT * FROM user_password_reset WHERE user_id = $1',
+      [user_id]
     );
     user_password_reset = user_password_reset.rows;
 
@@ -326,12 +344,16 @@ exports.resetPassword = async (req, res) => {
     const salt = await bcrypt.genSalt(10);
     const hashedPassword = await bcrypt.hash(password, salt);
 
-    const { rows } = await db.query(
-      `UPDATE users SET password = '${hashedPassword}' WHERE user_id = '${user_id}'`
-    );
+    const {
+      rows,
+    } = await db.query('UPDATE users SET password = $1 WHERE user_id = $2', [
+      hashedPassword,
+      user_id,
+    ]);
 
     await db.query(
-      `UPDATE user_password_reset SET reset_token = null, reset_token_expire = null WHERE user_id = '${user_id}'`
+      'UPDATE user_password_reset SET reset_token = null, reset_token_expire = null WHERE user_id = $1',
+      [user_id]
     );
     return res.status(200).json({ success: true });
   } catch (error) {
