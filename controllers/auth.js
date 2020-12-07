@@ -172,8 +172,6 @@ exports.completeRegistration = async (req, res) => {
 
   const { reason, interests, groups } = req.body;
 
-  console.log(reason, interests, groups);
-
   if (errors.errors.length > 0) {
     return res.status(400).json({ errors: errors.array() });
   }
@@ -185,8 +183,6 @@ exports.completeRegistration = async (req, res) => {
   }
 
   const tokenParsed = jwt.verify(token, process.env.JWT_SECRET);
-  console.log(tokenParsed);
-
   try {
     const {
       rows,
