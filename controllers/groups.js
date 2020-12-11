@@ -22,10 +22,24 @@ exports.createGroup = async (req, res) => {
       [name, location, topics, about, plan, user_id]
     );
 
-    console.log(rows);
+    const data = await db.query(
+      'INSERT INTO group_members VALUES($1, $2, $3)',
+      [rows[0].group_id, user_id, 'Organizer']
+    );
+
     res.status(201).json({ success: true, group: rows[0] });
   } catch (error) {
     console.log(error);
+    return res.status(500).json({ success: false, error });
+  }
+};
+
+exports.getAllGroups = async (req, res) => {
+  try {
+    const { rows } = await db.query('SELECT * FROM groups');
+
+    return res.status(200).json({ groups: rows });
+  } catch (error) {
     return res.status(500).json({ success: false, error });
   }
 };

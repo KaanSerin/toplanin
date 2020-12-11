@@ -1,12 +1,13 @@
 const express = require('express');
 const { check } = require('express-validator');
-const { createGroup } = require('../controllers/groups');
+const { createGroup, getAllGroups } = require('../controllers/groups');
 const { protect } = require('../middleware/auth');
 
 const router = express.Router();
 
 router
   .route('/')
+  .get(getAllGroups)
   .post(
     protect,
     [
