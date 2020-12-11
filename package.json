@@ -4,13 +4,15 @@
   "description": "Gather people around a certain topic or plan and gather up. Toplan!",
   "main": "server.js",
   "scripts": {
-    "dev": "nodemon server.js",
-    "start": "node server.js"
+    "client": "npm start --prefix client",
+    "server": "nodemon server.js",
+    "dev": "concurrently \"npm run server\" \"npm run client\""
   },
   "author": "Kaan Serin",
   "license": "ISC",
   "dependencies": {
     "bcrypt": "^5.0.0",
+    "concurrently": "^5.3.0",
     "cookie-parser": "^1.4.5",
     "crypto": "^1.0.1",
     "dotenv": "^8.2.0",
@@ -21,6 +23,7 @@
     "moment": "^2.29.1",
     "mongoose": "^5.10.14",
     "nodemailer": "^6.4.16",
+    "nodemon": "^2.0.6",
     "pg": "^8.5.1"
   }
 }

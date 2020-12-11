@@ -1,0 +1,85 @@
+.Nav{
+    position: relative;
+    z-index: 1;
+    
+    display: flex;
+    align-items: center;
+    justify-content: space-between;
+
+    padding: 15px 32px;
+}
+
+.blobLeft{
+    position: absolute;
+    top: 280px;
+    width: 240px;
+}
+.blobTop{
+    position: absolute;
+    top: 0;
+    left: 33%;
+    transform: (-50%);
+}
+.blobRight{
+    position: absolute;
+    top: 0;
+    right: 0;
+}
+.blobBottomRight{
+    position: absolute;
+    top: 500px;
+    right: 0;
+}
+
+.Nav .links a{
+    margin-left: 24px;
+
+    font-size: 14px;
+    font-weight: 500;
+    color: black;
+    text-decoration: none;
+}
+
+.Ctarea{
+    display: flex;
+justify-content: space-between;
+    margin: 48px 0 0 425px;
+}
+
+.Ctarea .OnlineCall{
+    position: relative;
+    width: 850px;
+    bottom: 30px;
+    margin-right: 5vw;
+}
+
+.Ctarea .Cta{
+    width: 450px;
+    
+}
+
+.Ctarea .Cta a{
+    display: block;
+    
+    width: 215px;
+
+    margin-top: 40px;
+
+    font-size: 16px;
+    font-weight: 500;
+    text-decoration: none;
+    text-align: center;
+
+    border-radius: 8px;
+    background: #FF1154;
+    color: white;
+
+    padding: 20px 60px;
+    
+}
+
+.Ctarea .Cta .text{
+    font-size: 56px;
+    line-height: 62px;
+    font-weight: 700;
+}
