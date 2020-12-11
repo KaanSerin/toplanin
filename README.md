@@ -8,7 +8,7 @@ It's still under development.
 
 The project is developed with the PERN stack!
 
-- [Postgresql](https://node-postgres.com/) - HTML enhanced for web apps!
+- [Postgresql](https://node-postgres.com/) - Preferred SQL system!
 - [Express](https://expressjs.com/) - fast node.js network app framework
 - [React](https://reactjs.org/) - My front-end framework of choice
 - [Node.js](https://nodejs.org/) - for the backend
