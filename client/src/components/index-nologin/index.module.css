@@ -9,6 +9,19 @@
     padding: 15px 32px;
 }
 
+.Main{
+    margin-top: 16px;
+    padding: 0 20px;
+}
+
+.Events{
+    max-width: 1070px;
+    margin: auto;
+    position: relative;
+    z-index: 2;
+    margin-top: 16px;
+}
+
 .blobLeft{
     position: absolute;
     top: 280px;
@@ -42,19 +55,25 @@
 
 .Ctarea{
     display: flex;
-justify-content: space-between;
-    margin: 48px 0 0 425px;
+    justify-content: space-between;
+    margin-top: 48px;
+    max-width: 1070px;
+    height: 420px;
+    margin: auto;
 }
 
 .Ctarea .OnlineCall{
-    position: relative;
+    position: absolute;
     width: 850px;
-    bottom: 30px;
+    top: 80px;
+    right: 5px;
     margin-right: 5vw;
 }
 
 .Ctarea .Cta{
     width: 450px;
+    position: relative;
+    z-index: 2;
     
 }
 
@@ -79,6 +98,7 @@ justify-content: space-between;
 }
 
 .Ctarea .Cta .text{
+    padding-top: 32px;
     font-size: 56px;
     line-height: 62px;
     font-weight: 700;

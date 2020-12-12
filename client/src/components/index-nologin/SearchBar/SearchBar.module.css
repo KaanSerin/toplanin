@@ -1,0 +1,78 @@
+.SearchBar{
+
+    display:flex;
+    justify-content: space-between;
+
+    border-radius: 4px;
+    padding: 15px 20px;
+    background-color: white;
+    box-shadow: 0 1px 6px 4px rgba(0, 0, 0, .08);
+}
+
+.SearchBar button{
+    width: 164px;
+
+    font-weight: 500;
+
+    padding: 8px 16px;
+
+    text-decoration: none;
+    color: #008294;
+    background-color: white;
+
+    margin-left: 28px;
+
+    border-radius: 8px;
+    border: 1px solid #008294;
+    
+}
+
+.SearchBar button:hover{
+    color: white;
+    background-color: #008294;
+    border: 1px solid #008294;
+    
+}
+
+.Inputs{
+    display: flex;
+    flex-grow: 1;
+}
+
+.Inputs .Keywords{
+    border: 1px solid rgb(175, 175, 175);
+    border-right: none;
+    border-top-left-radius: 8px;
+    border-bottom-left-radius: 8px;
+    padding: 14px 8px;
+    flex-grow: 1;
+    display: flex;
+}
+.Inputs .Keywords input{
+    margin-left: 4px;
+    border: none;
+    width: 100%;
+
+    font-size: 16px;
+    font-weight: 500;
+
+    outline: none;
+}
+
+.Inputs .Location{
+    border: 1px solid rgb(175, 175, 175);
+    border-top-right-radius: 8px;
+    border-bottom-right-radius: 8px;
+    padding: 14px 8px;
+    width: 282px;
+    display: flex;
+}
+.Inputs .Location input{
+    font-size: 14px;
+
+    margin-left: 4px;
+    border: none;
+    width: 100%;
+
+    outline: none;
+}
