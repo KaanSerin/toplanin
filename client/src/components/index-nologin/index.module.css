@@ -97,6 +97,10 @@
     
 }
 
+.Ctarea .Cta a:hover{
+    background: #ff608d;
+}
+
 .Ctarea .Cta .text{
     padding-top: 32px;
     font-size: 56px;

@@ -24,10 +24,13 @@
 
     border-radius: 8px;
     border: 1px solid #008294;
+
+    transition: all 0.2s ease-out;
     
 }
 
 .SearchBar button:hover{
+    cursor: pointer;
     color: white;
     background-color: #008294;
     border: 1px solid #008294;

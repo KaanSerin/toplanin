@@ -1,14 +1,20 @@
 const express = require('express');
+const cors = require('cors');
+
 const dotenv = require('dotenv');
 const cookieParser = require('cookie-parser');
 const fileUpload = require('express-fileupload');
+const axios = require('axios');
 
 // Importing routes
 const auth = require('./routes/auth');
 const users = require('./routes/users');
 const groups = require('./routes/groups');
+const client = require('./routes/client');
 
 const app = express();
+
+app.use(cors());
 
 // Load Environment Variables
 dotenv.config({ path: './config/config.env' });
@@ -23,6 +29,9 @@ app.use(express.json());
 app.use(cookieParser(process.env.COOKIE_SECRET));
 
 // Mounting Routes
+app.get('/', async (req, res) => {});
+
+app.use('/api/client', client);
 app.use('/api/auth', auth);
 app.use('/api/users', users);
 app.use('/api/groups', groups);

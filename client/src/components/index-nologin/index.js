@@ -1,7 +1,36 @@
-import React, { Fragment } from 'react';
+import React, { Fragment, useState, useEffect } from 'react';
 import classes from './index.module.css';
 import SearchBar from './SearchBar/SearchBar';
+import publicIp from 'public-ip';
+import axios from 'axios';
+
 const IndexNoLogin = () => {
+  const [searchText, setSearchText] = useState('');
+  const [searchLocation, setSearchLocation] = useState('');
+  const [userInfo, setUserInfo] = useState({});
+
+  useEffect(() => {
+    async function getUserInfo() {
+      // Get user ip
+      const ip = await publicIp.v4();
+      setUserInfo({ ...userInfo, ip });
+      console.log(ip);
+
+      try {
+        // Get user city and country by their ip
+        const { data } = await axios.get(
+          `http://localhost:5000/api/client/getInfo/${ip}`
+        );
+
+        setSearchLocation(`${data.data.city}, ${data.data.country_code}`);
+      } catch (error) {
+        console.log(error);
+      }
+    }
+
+    getUserInfo();
+  }, []);
+
   return (
     <Fragment>
       <img
@@ -51,7 +80,14 @@ const IndexNoLogin = () => {
         </div>
 
         <div className={classes.Events}>
-          <SearchBar></SearchBar>
+          <SearchBar
+            searchText={searchText}
+            onSearchChange={setSearchText}
+            searchLocation={searchLocation}
+            onLocationChange={setSearchLocation}
+          ></SearchBar>
+
+          <p className={classes.Subheading}>Events near {searchLocation} </p>
         </div>
       </div>
     </Fragment>
