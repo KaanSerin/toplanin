@@ -3,6 +3,7 @@ import classes from './index.module.css';
 import SearchBar from './SearchBar/SearchBar';
 import publicIp from 'public-ip';
 import axios from 'axios';
+import EventCard from '../EventCard/EventCard';
 
 const IndexNoLogin = () => {
   const [searchText, setSearchText] = useState('');
@@ -11,12 +12,11 @@ const IndexNoLogin = () => {
 
   useEffect(() => {
     async function getUserInfo() {
-      // Get user ip
-      const ip = await publicIp.v4();
-      setUserInfo({ ...userInfo, ip });
-      console.log(ip);
-
       try {
+        // Get user ip
+        const ip = await publicIp.v4();
+        setUserInfo({ ...userInfo, ip });
+
         // Get user city and country by their ip
         const { data } = await axios.get(
           `http://localhost:5000/api/client/getInfo/${ip}`
@@ -88,6 +88,8 @@ const IndexNoLogin = () => {
           ></SearchBar>
 
           <p className={classes.Subheading}>Events near {searchLocation} </p>
+
+          <EventCard></EventCard>
         </div>
       </div>
     </Fragment>

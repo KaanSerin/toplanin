@@ -22,6 +22,11 @@
     margin-top: 16px;
 }
 
+.Events .Subheading{
+    font-size: 2rem;
+    font-weight: 900;
+}
+
 .blobLeft{
     position: absolute;
     top: 280px;
@@ -105,5 +110,5 @@
     padding-top: 32px;
     font-size: 56px;
     line-height: 62px;
-    font-weight: 700;
+    font-weight: 900;
 }

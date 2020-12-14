@@ -1,0 +1,91 @@
+.EventCard{
+    position: relative;
+    width: 250px;
+    border: 1px solid rgb(197, 197, 197);
+    border-radius: 8px;
+    background-color: white;
+    overflow: hidden;
+    cursor: pointer;
+}
+
+.EventCard .OnlineEvent{
+    position: absolute;
+    top: 8px;
+    left: 8px;
+
+    display: flex;
+    align-items: center;
+    background-color: white;
+    border-radius: 6px;
+    padding: 4px 8px 4px 6px;
+}
+.EventCard .OnlineEvent p{
+    color: #212121;
+    font-size: 0.75rem;
+    font-weight: 700;
+    margin: 0;
+}
+.EventCard .OnlineEvent i{
+    margin-right: 6px;
+    color: grey;
+}
+
+.EventCard img{
+    height: 140px;
+    width: 248px;
+}
+
+.EventCard .Details{
+    padding: 12px;
+}
+
+.EventCard .EventName{
+    font-weight: 700;
+    margin: 8px 0;
+}
+
+.EventCard .EventDescription{
+    font-weight: 400;
+    font-size: 0.875rem;
+    color: #757575;
+}
+
+.EventCard .Details .Participents{
+ display: flex;
+ align-items: center;
+ color: #757575;
+}
+
+.EventCard .Details .Participents p{
+    margin: 0;
+}
+
+.EventCard .Details .Participents .Pics img{
+    width: 30px;
+    height: 30px;
+    border: 2px solid white;
+    border-radius: 50%;
+}
+
+.EventCard .Details .Participents .Pics img:nth-of-type(1){
+   position: relative;
+   z-index: 3;
+}
+.EventCard .Details .Participents .Pics img:nth-of-type(2){
+   position: relative;
+   z-index: 2;
+   left: -6px;
+}
+
+.EventCard .Details .Participents .Pics img:nth-of-type(3){
+   position: relative;
+   z-index: 1;
+   left: -12px;
+}
+
+.EventCard .Details .DueDate{
+    color: #877457;
+    text-transform: uppercase;
+    font-size: 0.875rem;
+    font-weight: 700;
+}
