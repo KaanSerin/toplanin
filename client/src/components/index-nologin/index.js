@@ -3,7 +3,7 @@ import classes from './index.module.css';
 import SearchBar from './SearchBar/SearchBar';
 import publicIp from 'public-ip';
 import axios from 'axios';
-import EventCard from '../EventCard/EventCard';
+import EventCardCarousel from '../EventCarousel/EventCardCarousel';
 
 const IndexNoLogin = () => {
   const [searchText, setSearchText] = useState('');
@@ -87,9 +87,23 @@ const IndexNoLogin = () => {
             onLocationChange={setSearchLocation}
           ></SearchBar>
 
-          <p className={classes.Subheading}>Events near {searchLocation} </p>
+          <p className={classes.Subheading}>Events near {searchLocation}</p>
+          <EventCardCarousel></EventCardCarousel>
 
-          <EventCard></EventCard>
+          <p className={classes.Subheading}>Career & Business</p>
+          <EventCardCarousel></EventCardCarousel>
+
+          <p className={classes.Subheading}>Outdoors & Adventure</p>
+          <EventCardCarousel></EventCardCarousel>
+
+          <p className={classes.Subheading}>Learning</p>
+          <EventCardCarousel></EventCardCarousel>
+
+          <p className={classes.Subheading}>Tech</p>
+          <EventCardCarousel></EventCardCarousel>
+
+          <p className={classes.Subheading}>Social</p>
+          <EventCardCarousel></EventCardCarousel>
         </div>
       </div>
     </Fragment>
