@@ -110,6 +110,69 @@ const IndexNoLogin = () => {
           <EventCategories></EventCategories>
         </div>
       </div>
+
+      <footer>
+        <div className={classes.Inner}>
+          <div className={classes.Cta}>
+            <p>Create your own Meetup group.</p>
+            <a href='http://www.google.com'>Get Started</a>
+          </div>
+
+          <div className={classes.Links}>
+            <div className={classes.LinkGroup}>
+              <p>Your Account</p>
+              <a href='http://www.google.com.tr'>Sign up</a>
+              <a href='http://www.google.com.tr'>Log in</a>
+              <a href='http://www.google.com.tr'>Help</a>
+            </div>
+            <div className={classes.LinkGroup}>
+              <p>Discover</p>
+              <a href='http://www.google.com.tr'>Groups</a>
+              <a href='http://www.google.com.tr'>Calendar</a>
+              <a href='http://www.google.com.tr'>Topics</a>
+              <a href='http://www.google.com.tr'>Cities</a>
+            </div>
+            <div className={classes.LinkGroup}>
+              <p>Meetup</p>
+              <a href='http://www.google.com.tr'>About</a>
+              <a href='http://www.google.com.tr'>Blog</a>
+              <a href='http://www.google.com.tr'>Meetup Pro</a>
+              <a href='http://www.google.com.tr'>Careers</a>
+              <a href='http://www.google.com.tr'>Apps</a>
+            </div>
+          </div>
+          <div className={classes.FollowUs}>
+            <div className={classes.Socials}>
+              <p>Follow Us</p>
+              <div className={classes.Icons}>
+                <a href='http://www.google.com.tr'>
+                  <i className='fab fa-facebook'></i>
+                </a>
+                <a href='http://www.google.com.tr'>
+                  <i className='fab fa-twitter'></i>
+                </a>
+                <a href='http://www.google.com.tr'>
+                  <i className='fab fa-youtube'></i>
+                </a>
+                <a href='http://www.google.com.tr'>
+                  <i className='fab fa-instagram'></i>
+                </a>
+              </div>
+            </div>
+            <div className={classes.Apps}>
+              <img src='./index-svg/google-play-badge.png' alt='' />
+              <img src='./index-svg/app-store-badge.png' alt='' />
+            </div>
+          </div>
+
+          <div className={classes.Policy}>
+            <p>© 2020 Toplanın</p>
+            <a href='http://www.google.com.tr'>Terms of Service</a>
+            <a href='http://www.google.com.tr'>Privacy Policy</a>
+            <a href='http://www.google.com.tr'>Cookie Policy</a>
+          </div>
+        </div>
+      </footer>
     </Fragment>
   );
 };

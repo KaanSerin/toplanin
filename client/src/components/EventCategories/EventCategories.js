@@ -7,7 +7,7 @@ const EventCategories = (props) => {
   // Pushing placeholder data
   for (let i = 0; i < 24; i++) {
     sampleData.push(
-      <div className={classes.EventCategory}>
+      <div key={i} className={classes.EventCategory}>
         <img
           src='https://hikeitbaby.com/wp-content/uploads/2020/06/StephanieJacobson.jpg'
           alt=''
