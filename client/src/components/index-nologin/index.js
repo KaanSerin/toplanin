@@ -4,6 +4,7 @@ import SearchBar from './SearchBar/SearchBar';
 import publicIp from 'public-ip';
 import axios from 'axios';
 import EventCardCarousel from '../EventCarousel/EventCardCarousel';
+import EventCategories from '../EventCategories/EventCategories';
 
 const IndexNoLogin = () => {
   const [searchText, setSearchText] = useState('');
@@ -104,6 +105,9 @@ const IndexNoLogin = () => {
 
           <p className={classes.Subheading}>Social</p>
           <EventCardCarousel></EventCardCarousel>
+
+          <p className={classes.Subheading}>Browse events by category</p>
+          <EventCategories></EventCategories>
         </div>
       </div>
     </Fragment>
