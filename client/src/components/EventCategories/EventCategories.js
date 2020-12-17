@@ -2,24 +2,23 @@ import React from 'react';
 import classes from './EventCategories.module.css';
 
 const EventCategories = (props) => {
-  const sampleData = [];
+  const categories_list = [];
 
-  // Pushing placeholder data
-  for (let i = 0; i < 24; i++) {
-    sampleData.push(
-      <div key={i} className={classes.EventCategory}>
+  props.categories.forEach((category) => {
+    categories_list.push(
+      <div key={category.category_id} className={classes.EventCategory}>
         <img
           src='https://hikeitbaby.com/wp-content/uploads/2020/06/StephanieJacobson.jpg'
           alt=''
         />
-        <p>Outdoors & Adventure</p>
+        <p>{category.category_name}</p>
       </div>
     );
-  }
+  });
 
   return (
     <div className={classes.EventCategories}>
-      <div className={classes.Row}>{sampleData}</div>
+      <div className={classes.Row}>{categories_list}</div>
     </div>
   );
 };

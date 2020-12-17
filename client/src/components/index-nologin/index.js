@@ -11,6 +11,8 @@ const IndexNoLogin = () => {
   const [searchLocation, setSearchLocation] = useState('');
   const [userInfo, setUserInfo] = useState({});
 
+  const [eventCategories, setEventCategories] = useState([]);
+
   useEffect(() => {
     async function getUserInfo() {
       try {
@@ -30,6 +32,17 @@ const IndexNoLogin = () => {
     }
 
     getUserInfo();
+
+    async function getEventCategories() {
+      const { data } = await axios.get(
+        'http://localhost:5000/api/events/eventcategories'
+      );
+
+      console.log(data.data);
+      setEventCategories(data.data);
+    }
+
+    getEventCategories();
   }, []);
 
   return (
@@ -107,7 +120,7 @@ const IndexNoLogin = () => {
           <EventCardCarousel></EventCardCarousel>
 
           <p className={classes.Subheading}>Browse events by category</p>
-          <EventCategories></EventCategories>
+          <EventCategories categories={eventCategories}></EventCategories>
         </div>
       </div>
 

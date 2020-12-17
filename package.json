@@ -27,6 +27,7 @@
     "nodemailer": "^6.4.16",
     "nodemon": "^2.0.6",
     "pg": "^8.5.1",
-    "public-ip": "^4.0.3"
+    "public-ip": "^4.0.3",
+    "react-router-dom": "^5.2.0"
   }
 }

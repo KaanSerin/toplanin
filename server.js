@@ -11,6 +11,7 @@ const auth = require('./routes/auth');
 const users = require('./routes/users');
 const groups = require('./routes/groups');
 const client = require('./routes/client');
+const events = require('./routes/events');
 
 const app = express();
 
@@ -35,6 +36,7 @@ app.use('/api/client', client);
 app.use('/api/auth', auth);
 app.use('/api/users', users);
 app.use('/api/groups', groups);
+app.use('/api/events', events);
 
 const PORT = process.env.PORT || 5000;
 
