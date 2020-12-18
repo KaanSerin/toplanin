@@ -1,5 +1,6 @@
 import React, { Fragment, useState, useEffect } from 'react';
-import classes from './index.module.css';
+import { Link } from 'react-router-dom';
+import classes from './Index.module.css';
 import SearchBar from './SearchBar/SearchBar';
 import publicIp from 'public-ip';
 import axios from 'axios';
@@ -38,7 +39,6 @@ const IndexNoLogin = () => {
         'http://localhost:5000/api/events/eventcategories'
       );
 
-      console.log(data.data);
       setEventCategories(data.data);
     }
 
@@ -84,7 +84,7 @@ const IndexNoLogin = () => {
             <div className={classes.text}>
               Discover events for all the things you love
             </div>
-            <a href='https://www.google.com'>Join Meetup</a>
+            <Link to='/register'>Join Meetup</Link>
           </div>
           <img
             src='./index-svg/online-call.svg'

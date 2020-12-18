@@ -1,0 +1,159 @@
+/* .Navigation */
+
+.Nav{
+    height: 64px;
+    border-bottom: 1px solid rgb(228, 228, 228);
+    padding: 0 32px;
+    display: flex;
+    align-items: center;
+}
+
+.Nav img{
+    width: 50px;
+}
+
+/* Main Options */
+section.Main{
+    max-width: 460px;
+    width: 100%;
+    padding: 24px 16px;
+    text-align: center;
+  
+    margin: auto;
+}
+
+section.Main .Inner .Cta{
+    font-size: 1.75rem;
+    font-weight: 700;
+
+    margin: 0 0 16px 0;
+}
+
+section.Main .Inner .SignUpOption{
+    display: flex;
+    align-items: center;
+    justify-content: space-between;
+    height: 42px;
+    border: 1px solid rgb(228, 228, 228);
+    border-radius: 4px;
+
+    padding: 8px;
+    margin-bottom: 16px;
+}
+
+section.Main .Inner .SignUpOption:hover{
+    cursor: pointer;
+    background-color: rgb(243, 243, 243);
+}
+
+section.Main .Inner .SignUpOption i{
+    padding-left: 8px;
+    font-size: 1.125rem;
+}
+
+section.Main .Inner .SignUpOption p{
+    width: 92%;
+    font-weight: 700;
+    font-size: 1.0625rem;
+    color: rgba(0,0,0,.54);
+}
+
+section.Main .Inner .Facebook{
+    background-color: #3b5998;
+}
+
+section.Main .Inner .Facebook p, section.Main .Inner .Facebook i{
+    color: white;
+}
+
+section.Main .Inner .Facebook:hover{
+    cursor: pointer;
+    background-color: #2c457c;
+}
+
+section.Main .Inner .SignUpOption p{
+    margin: 0 !important;
+}
+
+section.Main .Inner .FormLink{
+    color: #1f24cc;
+    font-size: 1.0625rem;
+}
+
+section.Main .Inner .FormLink:hover{
+    cursor: pointer;
+    text-decoration: underline;
+}
+
+section.Main .Inner{
+    border-bottom: 1px solid rgb(231, 231, 231);;
+}
+
+/* Email Form */
+
+.EmailSignup{
+    margin-top: 32px;
+}
+
+.EmailSignup .FormGroup{
+    display: flex;
+    text-align: start;
+    flex-direction: column;
+    margin-bottom: 24px;
+}
+
+.EmailSignup .FormGroup label{
+    font-size: .875rem;
+    color: rgb(59, 59, 59);
+    font-weight: 700;
+    margin-bottom: 4px;
+}
+
+.EmailSignup .FormGroup input{
+    height: 40px;
+    padding: 8px;
+    /* font-family: Arial; */
+    font-size: 1rem;
+    border: none;
+    border: 1px solid rgb(220, 220, 220);
+    border-radius: 4px;
+    background-color: rgb(250, 250, 250);
+}
+
+.EmailSignup .FormGroup input:focus{
+    outline: none;
+    border: 1px solid blue;
+    border-radius: 4px;
+}
+
+
+.EmailSignup .Disclaimer{
+    text-align: start;
+    line-height: 1.375rem;
+    color:rgb(172, 172, 172);
+    font-size: 0.875rem;
+}
+
+
+.EmailSignup .Submit{
+    height: 42px;
+    width: 100%;
+    
+    background-color: #FF1154;
+    color: white;
+    
+    border: none;
+    border-radius: 4px;
+
+    padding: 8px;
+
+    font-weight: 700;
+    font-size: 1.0625rem;
+}
+
+.EmailSignup .ToS{
+    font-size: 0.875rem;
+    line-height: 1.375rem;
+    font-weight: 400;
+    color:rgb(66, 66, 66);
+}

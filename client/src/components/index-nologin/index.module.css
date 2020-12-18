@@ -9,6 +9,11 @@
     padding: 15px 32px;
 }
 
+.Nav img{
+    width: 94px;
+    border: none;
+}
+
 .Main{
     margin-top: 16px;
     padding: 0 20px;
