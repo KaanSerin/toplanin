@@ -126,6 +126,66 @@ section.Main .Inner{
     border-radius: 4px;
 }
 
+.EmailSignup .Location{
+    text-align: start;
+
+    display: flex;
+    align-items: center;
+
+    font-size: 0.875rem;
+    font-weight: 700;
+
+    color: rgba(0,0,0,.54);
+}
+
+.EmailSignup .LocationSearch input{
+    width: 100%;
+    
+    height: 40px;
+    padding: 8px;
+    font-size: 1rem;
+    border: none;
+    border: 1px solid rgb(220, 220, 220);
+    border-radius: 4px;
+    background-color: rgb(250, 250, 250);
+}
+
+.EmailSignup .LocationSearch ul{
+    list-style: none;
+}
+
+.EmailSignup .LocationSearch ul li{
+    color: #1f24cc;
+    padding-bottom: 16px;
+    margin-bottom: 16px;
+}
+
+.EmailSignup .LocationSearch ul li:not(:last-of-type){
+    border-bottom: 1px solid rgb(220, 220, 220);
+}
+
+.EmailSignup .LocationSearch ul li:hover{
+    cursor: pointer;
+    text-decoration: underline;
+}
+
+.EmailSignup .Location span{
+    color: #1f24cc;
+    font-weight: 400;
+
+    display: inline-block;
+    margin-left: 6px;
+}
+
+.EmailSignup .Location span:hover{
+    cursor: pointer;
+    text-decoration: underline;
+}
+
+.EmailSignup .Location i{
+    font-size: 1.125rem;
+    margin-right: 8px;
+}
 
 .EmailSignup .Disclaimer{
     text-align: start;
@@ -149,6 +209,10 @@ section.Main .Inner{
 
     font-weight: 700;
     font-size: 1.0625rem;
+}
+
+.EmailSignup .Submit:hover{
+    cursor: pointer;
 }
 
 .EmailSignup .ToS{

@@ -26,6 +26,24 @@ const IndexNoLogin = () => {
           `http://localhost:5000/api/client/getInfo/${ip}`
         );
 
+        if (
+          (localStorage.getItem('user_data') !== null,
+          localStorage.getItem('user_data') !== '')
+        ) {
+          const user_data = {
+            ip,
+            location: {
+              country: data.data.country_code,
+              city: data.data.city,
+              timezone: data.data.timezone,
+              latitude: data.data.latitude,
+              longitude: data.data.longitude,
+            },
+          };
+
+          localStorage.setItem('user_data', JSON.stringify(user_data));
+        }
+
         setSearchLocation(`${data.data.city}, ${data.data.country_code}`);
       } catch (error) {
         console.log(error);

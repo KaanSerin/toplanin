@@ -1,60 +1,27 @@
-import React, { Fragment, useState } from 'react';
+import React, { Fragment, useState, useEffect } from 'react';
 import { Link } from 'react-router-dom';
+import EmailForm from './EmailForm/EmailForm';
 import classes from './Register.module.css';
-import ReCAPTCHA from 'react-google-recaptcha';
 
 const Register = () => {
   const [showEmailForm, setShowEmailForm] = useState(false);
+  const [userLocation, setUserLocation] = useState({});
 
-  const onFormSubmit = (e) => {
-    e.preventDefault();
-    console.log('Submitted');
-  };
+  useEffect(() => {
+    // If exists, fetch stored user data
+    let user_data = localStorage.getItem('user_data');
 
-  const onCaptchaSubmit = (value) => {
-    console.log(`Captcha value: ${value}`);
-  };
+    if (user_data !== null || user_data !== '') {
+      user_data = JSON.parse(user_data);
 
-  let emailForm = (
-    <div className={classes.EmailSignup}>
-      <form onSubmit={onFormSubmit}>
-        <div className={classes.FormGroup}>
-          <label htmlFor='name'>Your name</label>
-          <input type='text' name='name' />
-        </div>
-        <div className={classes.FormGroup}>
-          <label htmlFor='email'>Email address</label>
-          <input type='email' name='email' />
-        </div>
-        <div className={classes.FormGroup}>
-          <label htmlFor='password'>Password</label>
-          <input type='password' name='password' />
-        </div>
-
-        <ReCAPTCHA
-          sitekey='6Leo-gsaAAAAAO9Uxb7HKa3F3_0nMin1bfc6wdpH'
-          onChange={onCaptchaSubmit}
-        />
-
-        <p className={classes.Disclaimer}>
-          Your name is public. We'll use your email address to send you updates,
-          and your location to find Meetups near you.
-        </p>
-
-        <button type='submit' className={classes.Submit}>
-          Continue
-        </button>
-
-        <p className={classes.ToS}>
-          When you "Continue", you agree to Meetup's{' '}
-          <a href='http://www.google.com.tr'>Terms of Service.</a> We will
-          manage information about you as described in our{' '}
-          <a href='http://www.google.com.tr'>Privacy Policy</a>, and{' '}
-          <a href='http://www.google.com.tr'>Cookie Policy.</a>
-        </p>
-      </form>
-    </div>
-  );
+      setUserLocation({
+        country: user_data.location.country,
+        name: user_data.location.city,
+        latitude: user_data.location.latitude,
+        longitude: user_data.location.longitude,
+      });
+    }
+  }, []);
 
   return (
     <Fragment>
@@ -90,7 +57,12 @@ const Register = () => {
             </p>
           ) : null}
 
-          {showEmailForm ? emailForm : null}
+          {showEmailForm ? (
+            <EmailForm
+              onLocationChange={setUserLocation}
+              userLocation={userLocation}
+            ></EmailForm>
+          ) : null}
         </div>
 
         <p>
