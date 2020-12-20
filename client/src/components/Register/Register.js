@@ -1,27 +1,10 @@
-import React, { Fragment, useState, useEffect } from 'react';
+import React, { Fragment, useState } from 'react';
 import { Link } from 'react-router-dom';
 import EmailForm from './EmailForm/EmailForm';
 import classes from './Register.module.css';
 
 const Register = () => {
   const [showEmailForm, setShowEmailForm] = useState(false);
-  const [userLocation, setUserLocation] = useState({});
-
-  useEffect(() => {
-    // If exists, fetch stored user data
-    let user_data = localStorage.getItem('user_data');
-
-    if (user_data !== null || user_data !== '') {
-      user_data = JSON.parse(user_data);
-
-      setUserLocation({
-        country: user_data.location.country,
-        name: user_data.location.city,
-        latitude: user_data.location.latitude,
-        longitude: user_data.location.longitude,
-      });
-    }
-  }, []);
 
   return (
     <Fragment>
@@ -57,12 +40,7 @@ const Register = () => {
             </p>
           ) : null}
 
-          {showEmailForm ? (
-            <EmailForm
-              onLocationChange={setUserLocation}
-              userLocation={userLocation}
-            ></EmailForm>
-          ) : null}
+          {showEmailForm ? <EmailForm></EmailForm> : null}
         </div>
 
         <p>

@@ -77,7 +77,9 @@ const IndexNoLogin = () => {
       />
       <header>
         <nav className={classes.Nav}>
-          <img src='./logo.svg' alt='Meetup logo' />
+          <Link to='/'>
+            <img src='./logo.svg' alt='Meetup logo' />
+          </Link>
           <div className={classes.links}>
             <a href='https://www.google.com'>Log in</a>
             <a href='https://www.google.com'>Sign up</a>

@@ -1,0 +1,178 @@
+.Page{
+    display: flex;
+    flex-direction: column;
+    height: 100vh;
+}
+
+.Nav{
+    padding: 15px 32px;
+
+    border-bottom: 1px solid rgb(231, 231, 231);
+
+    position: relative;
+    z-index: 1;
+    
+    display: flex;
+    align-items: center;
+    justify-content: space-between;
+
+}
+
+.Nav img{
+    width: 94px;
+    border: none;
+}
+
+.Nav .links a{
+    margin-left: 24px;
+
+    font-size: 14px;
+    font-weight: 500;
+    color: black;
+    text-decoration: none;
+}
+
+section.Main{
+    background-color: rgb(248, 248, 248);
+    flex-grow: 1;
+}
+
+section.Main .AlmostDone{ 
+    width: 960px;
+    padding: 16px 32px;
+    background-color: white;
+    margin: 32px auto;
+}
+
+section.Main .AlmostDone p{
+    font-size: 1.125rem;
+}
+
+section.Main .AlmostDone .Section{
+    padding: 8px 0;
+    border-bottom: 1px solid rgb(231, 231, 231);
+}
+
+section.Main .AlmostDone h1{
+    margin: 0;
+    font-weight: 500;
+    font-size: 2.75rem;
+}
+/* FOOTER */
+footer{
+    background-color: #212121;
+    color: #F6F7F8;
+    padding: 24px;
+}
+
+footer .Inner{
+    max-width: 960px;
+    margin: auto;
+}
+
+
+footer .Inner .Cta {
+    display: flex;
+    align-items: center;
+
+    padding-bottom: 24px;
+    border-bottom: 1px solid grey;
+}
+
+footer .Inner .Cta p{
+    font-size: 1.25rem;
+    font-weight: 900;
+    margin: 0 16px 0 0;
+}
+
+footer .Inner .Cta a{
+    display: block;
+    padding: 8px 16px;
+
+    text-decoration: none;
+    color: white;
+
+    border: 2px solid white;
+    font-size: 1.125rem;
+    font-weight: 900;
+    border-radius: 8px;
+}
+
+footer .Inner .Cta a:hover{
+    border-color: rgb(219, 219, 219);
+}
+
+
+footer .Inner .Links{
+    display: grid;
+    grid-template-columns: repeat(3, 1fr);
+}
+
+footer .Inner .Links p{
+    margin-bottom: 8px;
+    font-size: 1.0625rem;
+    font-weight: 500;
+}
+
+footer .Inner a{
+    display: block;
+    
+    font-size: 0.9375rem;
+    font-weight: 500;
+
+    text-decoration: none;
+    color: #C5C4C4;
+    margin-bottom: 8px;
+}
+
+footer .Inner a:hover{
+    text-decoration: none;
+    color: #a1a1a1;
+}
+
+footer .Inner .FollowUs{
+    display: flex;
+    align-items: center;
+    justify-content: space-between;
+    margin-top: 32px;
+}
+
+footer .Inner .FollowUs .Apps img:first-of-type{
+    margin-right: 16px;
+}
+
+footer .Inner .FollowUs img{
+    height: 38px;
+}
+
+footer .Inner .FollowUs .Socials p{
+    font-weight: 500;
+    margin-top: 0;
+}
+
+footer .Inner .FollowUs .Socials a{
+   display: inline-block;
+}
+
+footer .Inner .FollowUs .Socials i{
+    font-size: 1.75rem;
+    color: #C5C4C4;
+
+    margin-right: 32px;
+}
+
+footer .Inner .Policy{
+   display: flex;
+   align-items: center;
+
+   margin-top: 32px;
+}
+
+footer .Inner .Policy *{
+    margin: 0 24px 0 0;
+}
+
+footer .Inner .Policy p{
+    font-weight: 500;
+    font-size: .9375rem;
+}

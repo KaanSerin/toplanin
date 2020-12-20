@@ -1,0 +1,133 @@
+
+.Nav{
+    padding: 15px 32px;
+
+    border-bottom: 1px solid rgb(231, 231, 231);
+
+    position: relative;
+    z-index: 1;
+    
+    display: flex;
+    align-items: center;
+    justify-content: space-between;
+
+}
+
+.Nav img{
+    width: 48px;
+    border: none;
+}
+
+.Main{
+    background-color: #f6f7f8;
+}
+
+.Main section.Inner{
+    max-width: 480px;
+    margin: auto;
+    
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    
+    text-align: center;
+}
+
+.Main section.Inner > i{
+    font-size: 2.75rem;
+
+    display: flex;
+    align-items: center;
+    justify-content: center;
+
+    border-radius: 50%;
+    background-color: #d2dae1;
+    color: #aab1b8;
+    
+    height: 120px;
+    width: 120px;
+
+    margin-bottom: 16px ;
+}
+
+.Main section.Inner .Upload{
+    height: 42px;
+    width: 100%;
+    
+    background-color: #FF1154;
+    color: white;
+    
+    border: none;
+    border-radius: 4px;
+
+    padding: 8px;
+
+    font-weight: 700;
+    font-size: 1.0625rem;
+}
+
+.Main section.Inner .Upload:hover{
+    cursor: pointer;
+}
+
+.Or{
+    width: 100%;
+    display: flex;
+    align-items: center;
+    margin: 16px 0;
+}
+
+.Or .Inner{
+    display: inline-block;
+    margin: 0 12px;
+}
+
+.Or .Line{
+    content: '';
+    display: inline-block;
+    border-top: 1px solid #d2dae1;
+   flex-grow: 1;
+}
+
+.Main section.Inner .SignUpOption{
+    width: 100%;
+    height: 42px;
+    
+    display: flex;
+    align-items: center;
+    justify-content: space-between;
+
+    font-weight: 500;
+
+    border: 1px solid rgb(228, 228, 228);
+    border-radius: 4px;
+
+    background-color: #3b5998;
+    color: white;
+
+    padding: 8px;
+    margin-bottom: 16px;
+}
+
+.Main section.Inner .SignUpOption i{
+    padding-left: 8px;
+    font-size: 1.125rem;
+}
+
+.Main section.Inner .SignUpOption:hover{
+    cursor: pointer;
+    background-color: #2c457c;
+}
+
+.Main section.Inner .SignUpOption p{
+    width: 100%;
+    margin: 0 !important;
+}
+
+.Skip{
+    font-size: 1.0625rem;
+}
+
+.Skip:hover{
+    cursor: pointer;
+}

@@ -1,29 +1,72 @@
-import React, { useState } from 'react';
+import React, { useState, useEffect } from 'react';
+import { withRouter } from 'react-router-dom';
 import classes from '../Register.module.css';
 import ReCAPTCHA from 'react-google-recaptcha';
 import LocationSearch from './LocationSearch';
+import axios from 'axios';
 
-const EmailForm = (props) => {
+const EmailForm = withRouter(({ history }) => {
   const [name, setName] = useState('');
   const [email, setEmail] = useState('');
   const [password, setPassword] = useState('');
+  const [userLocation, setUserLocation] = useState({});
 
   const [captchaDone, setCaptchaDone] = useState(false);
   const [showLocationSearch, setShowLocationSearch] = useState(false);
 
+  useEffect(() => {
+    // If exists, fetch stored user data
+    let user_data = localStorage.getItem('user_data');
+
+    if (user_data !== null || user_data !== '') {
+      user_data = JSON.parse(user_data);
+
+      setUserLocation({
+        country: user_data.location.country,
+        name: user_data.location.city,
+        latitude: user_data.location.latitude,
+        longitude: user_data.location.longitude,
+      });
+    }
+  }, []);
+
   const onLocationSelect = (location) => {
-    props.onLocationChange(location);
+    setUserLocation(location);
     setShowLocationSearch(false);
   };
 
-  const onFormSubmit = (e) => {
+  const onFormSubmit = async (e) => {
     e.preventDefault();
     if (!captchaDone) return;
 
-    setName('');
-    setEmail('');
-    setPassword('');
+    sendRegisterRequest();
+
     console.log('Submitted');
+  };
+
+  const sendRegisterRequest = async () => {
+    const newUser = {
+      name,
+      email,
+      password,
+      location: `${userLocation.latitude}, ${userLocation.longitude}`,
+    };
+
+    console.log(userLocation);
+
+    try {
+      const res = await axios.post(
+        'http://localhost:5000/api/auth/register',
+        newUser
+      );
+
+      console.log(res);
+
+      if (res.data.success && res.data.success === true)
+        history.push(`/almost-done?email=${email}`);
+    } catch (error) {
+      console.log(error);
+    }
   };
 
   const onCaptchaSubmit = (value) => {
@@ -67,7 +110,7 @@ const EmailForm = (props) => {
 
         <p className={classes.Location}>
           <i className='fas fa-map-marker-alt'></i>
-          {`${props.userLocation.name}, ${props.userLocation.country}`}
+          {`${userLocation.name}, ${userLocation.country}`}
           <span onClick={() => setShowLocationSearch(!showLocationSearch)}>
             (change)
           </span>
@@ -101,6 +144,6 @@ const EmailForm = (props) => {
       </form>
     </div>
   );
-};
+});
 
 export default EmailForm;
