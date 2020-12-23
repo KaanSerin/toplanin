@@ -1,0 +1,18 @@
+/* .Navigation */
+
+.Nav{
+    height: 64px;
+    border-bottom: 1px solid rgb(228, 228, 228);
+    padding: 0 32px;
+    display: flex;
+    align-items: center;
+}
+
+.Nav img{
+    width: 50px;
+}
+
+/* Main Options */
+div.Main{
+    background: rgb(247, 247, 247);
+}

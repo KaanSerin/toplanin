@@ -2,7 +2,7 @@ import IndexNoLogin from './components/Index-NoLogin/Index';
 import { Route, Switch, Redirect } from 'react-router-dom';
 import Register from './components/Register/Register';
 import AlmostDone from './components/AlmostDone/AlmostDone';
-import Welcome from './components/Welcome/Welcome';
+import CompleteRegistration from './components/CompleteRegistration/CompleteRegistration';
 
 function App() {
   return (
@@ -15,7 +15,7 @@ function App() {
           <Register></Register>
         </Route>
         <Route path='/almost-done' component={AlmostDone}></Route>
-        <Route path='/welcome' component={Welcome}></Route>
+        <Route path='/complete' component={CompleteRegistration}></Route>
         <Route exact path='*'>
           <Redirect to='/' />
         </Route>

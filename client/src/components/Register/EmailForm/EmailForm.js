@@ -52,7 +52,7 @@ const EmailForm = withRouter(({ history }) => {
       location: `${userLocation.latitude}, ${userLocation.longitude}`,
     };
 
-    console.log(userLocation);
+    console.log(newUser);
 
     try {
       const res = await axios.post(
@@ -121,6 +121,7 @@ const EmailForm = withRouter(({ history }) => {
         ) : null}
 
         <ReCAPTCHA
+          onExpired={() => setCaptchaDone(false)}
           sitekey='6Leo-gsaAAAAAO9Uxb7HKa3F3_0nMin1bfc6wdpH'
           onChange={onCaptchaSubmit}
         />

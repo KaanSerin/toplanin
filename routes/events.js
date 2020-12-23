@@ -1,8 +1,18 @@
 const express = require('express');
-const { getEventCategories } = require('../controllers/events');
+const { check } = require('express-validator');
+
+const {
+  getEventCategories,
+  getEventSubcategories,
+} = require('../controllers/events');
 
 const router = express.Router();
 
 router.get('/eventcategories', getEventCategories);
+router.post(
+  '/subcategories',
+  [check('interests', 'Please send at least 1 interest').isLength({ min: 1 })],
+  getEventSubcategories
+);
 
 module.exports = router;
