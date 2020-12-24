@@ -1,0 +1,39 @@
+.Topics {
+    max-width: 480px;
+    width: 100%;
+    margin: auto;
+    padding: 30px 0;
+}
+
+.Topics > h1 {
+    font-size: 1.75rem;
+    text-align: center;
+    color: #2e3e48;
+    margin-top: 0;
+}
+
+.Topic > h2 {
+    font-size: 1.0625rem;
+    font-weight: 900;
+}
+
+.Interests {
+    list-style: none;
+    padding: 0;
+}
+
+.Interests .Interest {
+    display: flex;
+    align-items: center;
+    
+    padding: 20px 0;
+
+    font-size: 1.03175rem;
+    font-weight: 500;
+    
+    border-bottom: 1px solid rgb(228, 228, 228);
+}
+
+.Checkbox{
+    margin-right: 10px;
+}

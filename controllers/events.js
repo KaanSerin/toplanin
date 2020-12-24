@@ -30,7 +30,6 @@ exports.getEventSubcategories = async (req, res) => {
   }
 
   const { interests } = req.body;
-  console.log(...interests);
 
   // Make this a parametrised query later...
   try {
