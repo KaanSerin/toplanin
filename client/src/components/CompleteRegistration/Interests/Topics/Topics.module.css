@@ -2,7 +2,7 @@
     max-width: 480px;
     width: 100%;
     margin: auto;
-    padding: 30px 0;
+    padding: 30px 0 18px;
 }
 
 .Topics > h1 {
@@ -36,4 +36,48 @@
 
 .Checkbox{
     margin-right: 10px;
+}
+
+button.Next{
+    margin-top: 15px;
+    padding: 12px;
+    
+    background-color: #f65858;
+    color: white;
+    border: none;
+    
+    font-size: 0.875rem;
+    font-weight: 700;
+    border-radius: 6px;
+    width: 100%;
+}
+
+button.Next:hover{
+    cursor: pointer;
+    background-color: #F6696B;
+}
+
+.ExtraTopics{
+    margin-top: 65px;
+}
+
+.ExtraTopics label{
+    display: block;
+    margin-bottom: 4px;
+    font-size: 1.0625rem;
+    font-weight: 500;
+}
+
+.ExtraTopics input{
+    border: 1px solid rgb(155, 155, 155);
+    border-radius: 4px;
+    width: 100%;
+
+    padding: 12px 16px;
+    line-height: 28px;
+}
+
+.ExtraTopics input:focus{
+    border: 1px solid #0098ab;
+    outline: none;
 }

@@ -2,6 +2,7 @@ import React, { useState, useEffect } from 'react';
 import axios from 'axios';
 import classes from './Topics.module.css';
 import CustomCheckmark from '../../../CustomCheckmark/CustomCheckmark';
+import ExtraTopics from './ExtraTopics/ExtraTopics';
 
 const Topics = ({ interests }) => {
   const [topics, setTopics] = useState([]);
@@ -18,14 +19,33 @@ const Topics = ({ interests }) => {
           reqData
         );
 
-        setTopics(res.data.data);
+        const newTopics = res.data.data.map((topic) => ({
+          ...topic,
+          selected: false,
+        }));
+
+        setTopics(newTopics);
       } catch (error) {
         console.log(error);
       }
     };
 
     getTopics();
+
+    // eslint-disable-next-line
   }, []);
+
+  const onCheckboxChecked = (id) => {
+    const newTopic = topics.map((topic) => {
+      if (topic.subcategory_id === id) {
+        topic.selected = !topic.selected;
+      }
+
+      return topic;
+    });
+
+    setTopics(newTopic);
+  };
 
   return (
     <div className={classes.Topics}>
@@ -38,13 +58,19 @@ const Topics = ({ interests }) => {
               .filter((topic) => topic.category_id === interest.category_id)
               .map((topic) => (
                 <li key={topic.subcategory_id} className={classes.Interest}>
-                  <CustomCheckmark id={topic.subcategory_id} />
+                  <CustomCheckmark
+                    onChecked={() => onCheckboxChecked(topic.subcategory_id)}
+                    id={topic.subcategory_id}
+                  />
                   {topic.subcategory_name}
                 </li>
               ))}
           </ul>
         </div>
       ))}
+
+      <ExtraTopics />
+      <button className={classes.Next}>Next</button>
     </div>
   );
 };

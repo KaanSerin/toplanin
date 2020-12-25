@@ -3,9 +3,6 @@ import { withRouter } from 'react-router-dom';
 import classes from './Interests.module.css';
 import axios from 'axios';
 
-/**
- * @Todo    Fetch possible interests from the server and display them
- */
 const Interests = ({ setInterests, history }) => {
   const [selectedInterests, setSelectedInterests] = useState([]);
 
@@ -14,7 +11,6 @@ const Interests = ({ setInterests, history }) => {
       const res = await axios.get(
         'http://localhost:5000/api/events/eventcategories'
       );
-      console.log(res);
 
       const formattedData = res.data.data.map((interest) => ({
         ...interest,
