@@ -4,6 +4,8 @@ import classes from './CustomCheckmark.module.css';
 const CustomCheckmark = (props) => (
   <div className={classes.Wrapper}>
     <input
+      defaultChecked={props.defaultChecked}
+      checked={props.checked}
       onChange={props.onChecked}
       type='checkbox'
       className={classes.Checkbox}

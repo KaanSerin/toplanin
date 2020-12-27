@@ -33,7 +33,7 @@ const CompleteRegistration = () => {
         <Switch>
           <Route
             path={`${match.path}/reason`}
-            render={(props) => <Reason {...props} setReason={setInterests} />}
+            render={(props) => <Reason {...props} setReason={setReason} />}
           />
           <Route
             path={`${match.path}/interests`}
@@ -44,7 +44,11 @@ const CompleteRegistration = () => {
           <Route
             path={`${match.path}/topics`}
             render={(props) => (
-              <Topics {...props} interests={interests} setTopics={setTopics} />
+              <Topics
+                {...props}
+                interests={interests}
+                onSetTopics={setTopics}
+              />
             )}
           />
           <Route

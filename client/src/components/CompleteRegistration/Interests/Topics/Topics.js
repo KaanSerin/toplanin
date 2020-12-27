@@ -1,11 +1,14 @@
 import React, { useState, useEffect } from 'react';
+import { withRouter } from 'react-router-dom';
+import { v4 as uuidv4 } from 'uuid';
 import axios from 'axios';
 import classes from './Topics.module.css';
 import CustomCheckmark from '../../../CustomCheckmark/CustomCheckmark';
 import ExtraTopics from './ExtraTopics/ExtraTopics';
 
-const Topics = ({ interests }) => {
+const Topics = ({ history, interests, onSetTopics }) => {
   const [topics, setTopics] = useState([]);
+  const [topicsExtra, setTopicsExtra] = useState([]);
 
   useEffect(() => {
     const getTopics = async () => {
@@ -47,6 +50,36 @@ const Topics = ({ interests }) => {
     setTopics(newTopic);
   };
 
+  const onExtraTopicsChecked = (id) => {
+    const newTopicsExtra = topicsExtra.filter((te) => te.id !== id);
+
+    setTopicsExtra(newTopicsExtra);
+  };
+
+  const onSelectExtraTopic = (topic) => {
+    const newTopic = {
+      id: uuidv4(),
+      ...topic,
+    };
+    const newTopics = [...topicsExtra, newTopic];
+    setTopicsExtra(newTopics);
+  };
+
+  const onConfirmTopics = () => {
+    // Combine the topics and extra topics
+
+    const newTopics = [
+      ...topics
+        .filter((topic) => topic.selected)
+        .map((topic) => topic.subcategory_name),
+      ...topicsExtra.map((te) => te.title),
+    ];
+
+    onSetTopics(newTopics);
+
+    history.push('/complete/groups');
+  };
+
   return (
     <div className={classes.Topics}>
       <h1>Now narrow it down</h1>
@@ -69,10 +102,25 @@ const Topics = ({ interests }) => {
         </div>
       ))}
 
-      <ExtraTopics />
-      <button className={classes.Next}>Next</button>
+      <ExtraTopics onSelectExtraTopic={onSelectExtraTopic} />
+
+      <ul className={classes.ExtraTopicsList}>
+        {topicsExtra.map((te) => (
+          <li
+            onClick={() => onExtraTopicsChecked(te.id)}
+            key={`${te.title}_${te.category}_${te.subCategory}`}
+          >
+            <CustomCheckmark defaultChecked={true} id={te.id} />
+            {`${te.title} (${te.category})`}
+          </li>
+        ))}
+      </ul>
+
+      <button onClick={onConfirmTopics} className={classes.Next}>
+        Next
+      </button>
     </div>
   );
 };
 
-export default Topics;
+export default withRouter(Topics);
