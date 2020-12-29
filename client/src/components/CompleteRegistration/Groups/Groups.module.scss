@@ -1,0 +1,90 @@
+.Groups{
+    text-align: center;
+    padding: 1px 20px 10px;
+    max-width: 1100px;
+}
+
+.Groups > p{
+    color:#757575;
+    font-size: 1rem;
+    margin-bottom: 32px;
+}
+
+.GroupsList{
+    display: grid;
+    gap: 10px;
+    grid-template-columns: repeat(3, 1fr);
+}
+
+.GroupsList .Group{
+    padding: 15px;
+    display: flex;
+    justify-content: center;
+
+    color: white;
+    background-color: red;
+    border-radius: 10px;
+
+    .Details{
+        flex-grow: 2;
+        text-align: left;
+    
+        h3{
+            margin-top: 0;
+            font-weight: 900;
+        }
+    
+        p{
+            font-weight: 500;
+            padding-top: 50px;
+            margin: 0;
+        }
+    }
+
+    .Join{
+        flex-grow: 1;
+
+        .JoinBtn{
+            width: 38px;
+            padding: 0 5px;
+
+            font-size: 1.75rem;
+            font-weight: 400;
+
+            color: rgba(255, 255, 255, 0.541);
+
+            margin: 0 auto;
+
+            border: 2px solid white;
+            border-radius: 50%;
+        }
+    }
+
+    &:hover{
+        cursor: pointer;
+    }
+}
+
+button{
+    margin: 38px 0 14px 0;
+
+    height: 42px;
+    width: 100%;
+    
+    background: white;
+
+    border: 1px solid #0098ab;
+    border-radius: 8px;
+
+    color: #0098ab;
+    font-size: 0.875rem;
+    font-weight: 900;
+
+    transition: 0.2s all;
+
+    &:hover{
+        cursor: pointer;
+        background: #0098ab;
+        color: white;
+    }
+}
