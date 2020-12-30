@@ -27,7 +27,7 @@ const Groups = () => {
           <div key={group.group_id} className={classes.Group}>
             <div className={classes.Details}>
               <h3>{group.name}</h3>
-              <p>X Members • Public Group</p>
+              <p>{group.no_of_members} Members • Public Group</p>
             </div>
             <div className={classes.Join}>
               <div className={classes.JoinBtn}>+</div>

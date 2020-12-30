@@ -50,7 +50,7 @@ exports.getPopularGroups = async (req, res) => {
     WITH group_member_counts AS (
       SELECT group_id, COUNT(user_id) as no_of_members FROM group_members GROUP BY group_id  LIMIT 9
     )
-    SELECT groups.group_id, group_member_counts.no_of_members FROM groups, group_member_counts WHERE groups.group_id = group_member_counts.group_id;
+    SELECT groups.group_id, groups.name, groups.about, group_member_counts.no_of_members FROM groups, group_member_counts WHERE groups.group_id = group_member_counts.group_id;
   `);
 
     return res.status(200).json({ groups: rows });
