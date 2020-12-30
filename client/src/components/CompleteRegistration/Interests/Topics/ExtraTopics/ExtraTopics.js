@@ -31,11 +31,11 @@ const ExtraTopics = ({ onSelectExtraTopic }) => {
     <div className={classes.ExtraTopics}>
       <div className={classes.TopicsArea}>
         {extraTopics.map((topic) => (
-          <button
+          <div
             onClick={(event) => onTopicClick(event, topic)}
             className={classes.Topic}
             key={`${topic.title}_${topic.category}_${topic.subCategory}`}
-          >{`${topic.title} (${topic.category})`}</button>
+          >{`${topic.title} (${topic.category})`}</div>
         ))}
       </div>
       <label htmlFor='extra-topics'>Anything else?</label>

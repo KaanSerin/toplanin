@@ -61,6 +61,8 @@ const IndexNoLogin = () => {
     }
 
     getEventCategories();
+
+    // eslint-disable-next-line
   }, []);
 
   return (
@@ -82,7 +84,7 @@ const IndexNoLogin = () => {
           </Link>
           <div className={classes.links}>
             <a href='https://www.google.com'>Log in</a>
-            <a href='https://www.google.com'>Sign up</a>
+            <Link to='/register'>Sign up</Link>
           </div>
         </nav>
         <img

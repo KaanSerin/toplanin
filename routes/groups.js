@@ -1,6 +1,10 @@
 const express = require('express');
 const { check } = require('express-validator');
-const { createGroup, getAllGroups } = require('../controllers/groups');
+const {
+  createGroup,
+  getAllGroups,
+  getPopularGroups,
+} = require('../controllers/groups');
 const { protect } = require('../middleware/auth');
 
 const router = express.Router();
@@ -22,5 +26,7 @@ router
     ],
     createGroup
   );
+
+router.get('/popular', getPopularGroups);
 
 module.exports = router;

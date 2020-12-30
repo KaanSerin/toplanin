@@ -1,7 +1,20 @@
-import React from 'react';
+import React, { useState, useEffect } from 'react';
 import classes from './Groups.module.scss';
+import axios from 'axios';
 
 const Groups = () => {
+  const [groups, setGroups] = useState([]);
+
+  useEffect(() => {
+    const fetchGroupData = async () => {
+      const res = await axios.get('http://localhost:5000/api/groups/popular');
+
+      setGroups(res.data.groups);
+    };
+
+    fetchGroupData();
+  }, []);
+
   return (
     <div className={classes.Groups}>
       <h1>Find a group to join</h1>
@@ -10,69 +23,17 @@ const Groups = () => {
         join.
       </p>
       <div className={classes.GroupsList}>
-        <div className={classes.Group}>
-          <div className={classes.Details}>
-            <h3>RSM Accountants</h3>
-            <p>21 Members • Public Group</p>
+        {groups.map((group) => (
+          <div key={group.group_id} className={classes.Group}>
+            <div className={classes.Details}>
+              <h3>{group.name}</h3>
+              <p>X Members • Public Group</p>
+            </div>
+            <div className={classes.Join}>
+              <div className={classes.JoinBtn}>+</div>
+            </div>
           </div>
-          <div className={classes.Join}>
-            <div className={classes.JoinBtn}>+</div>
-          </div>
-        </div>
-        <div className={classes.Group}>
-          <div className={classes.Details}>
-            <h3>RSM Accountants</h3>
-            <p>21 Members • Public Group</p>
-          </div>
-          <div className={classes.Join}>
-            <div className={classes.JoinBtn}>+</div>
-          </div>
-        </div>
-        <div className={classes.Group}>
-          <div className={classes.Details}>
-            <h3>RSM Accountants</h3>
-            <p>21 Members • Public Group</p>
-          </div>
-          <div className={classes.Join}>
-            <div className={classes.JoinBtn}>+</div>
-          </div>
-        </div>
-        <div className={classes.Group}>
-          <div className={classes.Details}>
-            <h3>RSM Accountants</h3>
-            <p>21 Members • Public Group</p>
-          </div>
-          <div className={classes.Join}>
-            <div className={classes.JoinBtn}>+</div>
-          </div>
-        </div>
-        <div className={classes.Group}>
-          <div className={classes.Details}>
-            <h3>RSM Accountants</h3>
-            <p>21 Members • Public Group</p>
-          </div>
-          <div className={classes.Join}>
-            <div className={classes.JoinBtn}>+</div>
-          </div>
-        </div>
-        <div className={classes.Group}>
-          <div className={classes.Details}>
-            <h3>RSM Accountants</h3>
-            <p>21 Members • Public Group</p>
-          </div>
-          <div className={classes.Join}>
-            <div className={classes.JoinBtn}>+</div>
-          </div>
-        </div>
-        <div className={classes.Group}>
-          <div className={classes.Details}>
-            <h3>RSM Accountants</h3>
-            <p>21 Members • Public Group</p>
-          </div>
-          <div className={classes.Join}>
-            <div className={classes.JoinBtn}>+</div>
-          </div>
-        </div>
+        ))}
       </div>
 
       <button>Next</button>
