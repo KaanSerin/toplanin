@@ -1,0 +1,113 @@
+.GroupModal{
+    position: absolute;
+    top: 0;
+    left: 0;
+    width: 100%;
+    height: 100%;
+    background-color: rgba(0, 0, 0, 0.712);
+}
+
+.Modal{
+    width: 440px;
+
+    position: absolute;
+    top: 50%;
+    left: 50%;
+    transform: translate(-50%, -75%);
+
+    background-color: white;
+    
+    .Header{
+        padding: 15px 25px;
+
+        background-color: rgb(109, 135, 190);
+        color: white;
+
+        text-align: start;
+        
+
+        .Close{
+            font-size: 1.5rem;
+            color: rgba(230, 230, 230, 0.76);
+            transition: color .1s;
+
+            &:hover{
+                cursor: pointer;
+                color: white;
+            }
+        }
+
+        h1{
+            font-weight: 900;
+            text-shadow: 1px 1px 0 rgba(0, 0, 0, 0.322);
+            margin: 60px 0 0;
+        }
+
+        p{
+            margin: 12px 0 0;
+            text-shadow: 1px 1px 0 rgba(0, 0, 0, 0.322);
+        }
+    }
+
+    .Main{
+        text-align: start;
+        padding: 16px 20px;
+
+        .Organizer{
+            display: flex;
+            align-items: center;
+            justify-content: space-between;
+            margin-top: 20px;
+
+            i{
+                display: block;
+                background-color: #d2dae1;
+                color: #aab1b8;
+                border-radius: 50%;
+                padding: 10px;
+                font-size: 1.375rem;
+                margin-right: 16px;
+            }
+
+            .Details{
+                display: flex;
+                align-items: center;
+                text-align: start;
+
+                p{
+                    margin: 3px 0;
+                }
+            }
+
+            .Join button{
+                background-color: #f65858;
+                border-color: #f65858;
+                
+                color: white;
+                font-weight: 900;
+                
+                margin: 0;
+                width: 140px;
+
+                &:hover{
+                    background-color: lighten(#f65858, 7%);
+                    border-color: lighten(#f65858, 7%);
+                }
+            }
+        }
+
+        .About, .GroupInfo{
+            margin-top: 24px;
+
+            h2{
+                font-size: 1.0625rem;
+                font-weight: 900;
+                margin-bottom: 4px;
+            }
+            p{
+                margin: 0;
+                font-size: 1rem;
+            }
+        }
+    }
+}

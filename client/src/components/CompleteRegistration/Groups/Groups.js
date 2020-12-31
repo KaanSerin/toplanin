@@ -1,19 +1,39 @@
 import React, { useState, useEffect } from 'react';
 import classes from './Groups.module.scss';
 import axios from 'axios';
+import GroupModal from './GroupModal/GroupModal';
 
 const Groups = () => {
   const [groups, setGroups] = useState([]);
+  const [showGroupModal, setShowGroupModal] = useState(false);
 
   useEffect(() => {
     const fetchGroupData = async () => {
       const res = await axios.get('http://localhost:5000/api/groups/popular');
 
-      setGroups(res.data.groups);
+      setGroups(
+        res.data.groups.map((group) => ({ ...group, selected: false }))
+      );
     };
 
     fetchGroupData();
   }, []);
+
+  const onClickJoinBtn = (id) => {
+    const newGroups = groups.map((group) => {
+      if (group.group_id === id) {
+        group.selected = !group.selected;
+      }
+      return group;
+    });
+
+    setGroups(newGroups);
+  };
+
+  const onClickGroup = (id) => {
+    if (showGroupModal) return;
+    setShowGroupModal(true);
+  };
 
   return (
     <div className={classes.Groups}>
@@ -22,15 +42,30 @@ const Groups = () => {
         Join groups to start meeting up and get suggestions based on what you
         join.
       </p>
+
+      {showGroupModal ? (
+        <GroupModal onClickClose={() => setShowGroupModal(false)} />
+      ) : null}
+
       <div className={classes.GroupsList}>
         {groups.map((group) => (
           <div key={group.group_id} className={classes.Group}>
-            <div className={classes.Details}>
+            <div
+              onClick={() => onClickGroup(group.group_id)}
+              className={classes.Details}
+            >
               <h3>{group.name}</h3>
               <p>{group.no_of_members} Members • Public Group</p>
             </div>
             <div className={classes.Join}>
-              <div className={classes.JoinBtn}>+</div>
+              <div
+                onClick={() => onClickJoinBtn(group.group_id)}
+                className={`${classes.JoinBtn} ${
+                  group.selected ? classes.Selected : null
+                }`}
+              >
+                +
+              </div>
             </div>
           </div>
         ))}
