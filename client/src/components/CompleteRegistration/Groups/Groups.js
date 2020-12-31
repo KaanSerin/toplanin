@@ -5,15 +5,14 @@ import GroupModal from './GroupModal/GroupModal';
 
 const Groups = () => {
   const [groups, setGroups] = useState([]);
+  const [selectedGroup, setSelectedGroup] = useState(null);
   const [showGroupModal, setShowGroupModal] = useState(false);
 
   useEffect(() => {
     const fetchGroupData = async () => {
       const res = await axios.get('http://localhost:5000/api/groups/popular');
 
-      setGroups(
-        res.data.groups.map((group) => ({ ...group, selected: false }))
-      );
+      setGroups(res.data.groups.map((group) => ({ ...group, joined: false })));
     };
 
     fetchGroupData();
@@ -22,7 +21,7 @@ const Groups = () => {
   const onClickJoinBtn = (id) => {
     const newGroups = groups.map((group) => {
       if (group.group_id === id) {
-        group.selected = !group.selected;
+        group.joined = !group.joined;
       }
       return group;
     });
@@ -32,6 +31,7 @@ const Groups = () => {
 
   const onClickGroup = (id) => {
     if (showGroupModal) return;
+    setSelectedGroup(groups.find((group) => group.group_id === id));
     setShowGroupModal(true);
   };
 
@@ -44,7 +44,11 @@ const Groups = () => {
       </p>
 
       {showGroupModal ? (
-        <GroupModal onClickClose={() => setShowGroupModal(false)} />
+        <GroupModal
+          group={selectedGroup}
+          onClickJoin={onClickJoinBtn}
+          onClickClose={() => setShowGroupModal(false)}
+        />
       ) : null}
 
       <div className={classes.GroupsList}>
@@ -55,13 +59,16 @@ const Groups = () => {
               className={classes.Details}
             >
               <h3>{group.name}</h3>
-              <p>{group.no_of_members} Members • Public Group</p>
+              <p>
+                {group.no_of_members} Members •{' '}
+                {group.public ? 'Public' : 'Private'} Group
+              </p>
             </div>
             <div className={classes.Join}>
               <div
                 onClick={() => onClickJoinBtn(group.group_id)}
                 className={`${classes.JoinBtn} ${
-                  group.selected ? classes.Selected : null
+                  group.joined ? classes.Joined : null
                 }`}
               >
                 +

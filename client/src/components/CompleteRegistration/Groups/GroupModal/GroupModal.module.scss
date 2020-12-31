@@ -1,4 +1,4 @@
-.GroupModal{
+.Background{
     position: absolute;
     top: 0;
     left: 0;
@@ -59,20 +59,20 @@
             justify-content: space-between;
             margin-top: 20px;
 
-            i{
-                display: block;
-                background-color: #d2dae1;
-                color: #aab1b8;
-                border-radius: 50%;
-                padding: 10px;
-                font-size: 1.375rem;
-                margin-right: 16px;
-            }
-
             .Details{
                 display: flex;
                 align-items: center;
                 text-align: start;
+
+                i{
+                    display: block;
+                    background-color: #d2dae1;
+                    color: #aab1b8;
+                    border-radius: 50%;
+                    padding: 10px;
+                    font-size: 1.375rem;
+                    margin-right: 16px;
+                }
 
                 p{
                     margin: 3px 0;
@@ -92,6 +92,19 @@
                 &:hover{
                     background-color: lighten(#f65858, 7%);
                     border-color: lighten(#f65858, 7%);
+                }
+            }
+
+            .Joined{
+                p{
+                    margin: 0;
+                }
+                i{
+                    color: white;
+                    background: grey;
+                    border-radius: 50%;
+                    padding: 3px;
+                    margin-right: 4px;
                 }
             }
         }
