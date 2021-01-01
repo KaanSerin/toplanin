@@ -1,5 +1,39 @@
 const db = require('../config/db');
 const { validationResult } = require('express-validator');
+const { query } = require('../config/db');
+
+/**
+ * @desc    Get Events
+ * @route   GET /api/events
+ * @access  Public
+ */
+exports.getEvents = async (req, res) => {
+  // Setting up the query
+  let queryText = 'SELECT * FROM events';
+  let queryParams = [];
+
+  const { long, lat, limit } = req.query;
+
+  // If long and lattitude are provided
+  if (long && lat) {
+    queryText += ' WHERE location = ST_MakePoint($1, $2)';
+    queryParams.push(long, lat);
+  }
+  // PGSQL Limit null === No limit
+  if (limit) {
+    queryText += ' LIMIT $3';
+    queryParams.push(limit);
+  }
+
+  try {
+    const { rows } = await db.query(queryText, queryParams);
+
+    res.status(200).json({ success: true, data: rows });
+  } catch (error) {
+    console.log(error);
+    res.status(500).json({ success: false, error });
+  }
+};
 
 /**
  * @desc    Get Event Categories

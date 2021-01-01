@@ -4,10 +4,12 @@ const { check } = require('express-validator');
 const {
   getEventCategories,
   getEventSubcategories,
+  getEvents,
 } = require('../controllers/events');
 
 const router = express.Router();
 
+router.get('/', getEvents);
 router.get('/eventcategories', getEventCategories);
 router.post(
   '/subcategories',
