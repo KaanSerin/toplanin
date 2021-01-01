@@ -1,6 +1,7 @@
 import React, { Fragment, useState } from 'react';
 import { useRouteMatch, Link, Switch, Route } from 'react-router-dom';
 import classes from './CompleteRegistration.module.css';
+import Events from './Events/Events';
 import Groups from './Groups/Groups';
 import Interests from './Interests/Interests';
 import Topics from './Interests/Topics/Topics';
@@ -56,6 +57,7 @@ const CompleteRegistration = () => {
             path={`${match.path}/groups`}
             render={(props) => <Groups setGroups={setGroups} />}
           />
+          <Route path={`${match.path}/events`} render={(props) => <Events />} />
           <Route
             path={`${match.path}/`}
             render={(props) => (

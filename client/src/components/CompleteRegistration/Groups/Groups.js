@@ -1,9 +1,10 @@
 import React, { useState, useEffect } from 'react';
+import { withRouter } from 'react-router-dom';
 import classes from './Groups.module.scss';
 import axios from 'axios';
 import GroupModal from './GroupModal/GroupModal';
 
-const Groups = () => {
+const Groups = ({ history }) => {
   const [groups, setGroups] = useState([]);
   const [selectedGroup, setSelectedGroup] = useState(null);
   const [showGroupModal, setShowGroupModal] = useState(false);
@@ -33,6 +34,10 @@ const Groups = () => {
     if (showGroupModal) return;
     setSelectedGroup(groups.find((group) => group.group_id === id));
     setShowGroupModal(true);
+  };
+
+  const onClickNext = () => {
+    history.push('/complete/events');
   };
 
   return (
@@ -78,9 +83,9 @@ const Groups = () => {
         ))}
       </div>
 
-      <button>Next</button>
+      <button onClick={onClickNext}>Next</button>
     </div>
   );
 };
 
-export default Groups;
+export default withRouter(Groups);

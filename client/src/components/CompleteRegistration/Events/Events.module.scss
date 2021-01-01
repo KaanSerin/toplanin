@@ -1,3 +1,98 @@
 .Events{
-    
+    max-width: 480px;
+    margin: auto;
+
+    text-align: center;
+
+    color: #2E3E48;
+    padding: 28px 0;
+
+    &  > h1{
+        margin-top: 0;
+        font-size: 1.75rem;
+        font-weight: 900;
+    }
+
+    & > p{
+        color: #757575;
+        font-size: 1.03175rem;
+        font-weight: 500;
+    }
+}
+
+.EventsList{
+    margin-top: 30px;
+
+    .Event{
+        text-align: start;
+        padding: 16px;
+        width: 100%;
+        background-color: white;
+        box-shadow: 0 2px 8px rgba(46,62,72,.12);
+
+        .Details{
+            margin-bottom: 40px;
+            h2{
+                margin: 0;
+                font-weight: 900;
+                font-size: 1.625rem;
+            }
+            .GroupName{
+                color: #f13a59;
+                font-size: 0.9325rem;
+                margin: 4px 0;
+                font-weight: 700;
+            }
+            .Time, .Location{
+                margin: 4px 0;
+                font-size: 0.9325rem;
+                color: #757575;
+            }
+        }
+
+        .Going{
+            display: flex;
+            align-items: center;
+            justify-content: flex-end;
+
+            i{
+                margin-left: 8px;
+                font-size: 1.5rem;
+                border: 1px solid rgb(128, 128, 128);
+                border-radius: 12px;
+                padding: 0 6px;
+            }
+        }
+        
+        .Participents{
+            .Pics{
+                display: flex;
+                color: #757575;
+                font-size: .925rem;
+                img{
+                    position: relative;
+                    width: 45px;
+                    height: 45px;
+                    border: 2px solid white;
+                    border-radius: 50%;
+                    
+                    &:nth-of-type(1){
+                        z-index: 4;
+                    }
+                    &:nth-of-type(2){
+                        z-index: 3;
+                        left: -6px;
+                    }
+                    &:nth-of-type(3){
+                        z-index: 2;
+                        left: -12px;
+                    }
+                    &:nth-of-type(4){
+                        z-index: 1;
+                        left: -18px;
+                    }
+                }
+            }
+        }
+    }
 }

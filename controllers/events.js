@@ -3,32 +3,47 @@ const { validationResult } = require('express-validator');
 const { query } = require('../config/db');
 
 /**
+ * @ToDo  Format response event date/time and location information
+ * @Date  moment('2021-01-01T22:00:00.000Z').format('dddd, MMMM D, YYYY, hh:mm A Z');
+ * @Location
+ */
+
+/**
  * @desc    Get Events
  * @route   GET /api/events
  * @access  Public
  */
 exports.getEvents = async (req, res) => {
   // Setting up the query
-  let queryText = 'SELECT * FROM events';
+  let queryText = `WITH event_attendances AS (
+    SELECT event_id, COUNT(user_id) as attendees 
+    FROM event_attendees
+    GROUP BY event_id
+    )
+    SELECT events.event_id, events.name as event_name, events.group_id, groups.name as group_name,
+    events.details, events.date as date, events.location, events.online, event_attendances.attendees
+    FROM events
+    JOIN groups ON events.group_id = groups.group_id
+    JOIN event_attendances ON events.event_id = event_attendances.event_id`;
   let queryParams = [];
 
   const { long, lat, limit } = req.query;
 
   // If long and lattitude are provided
   if (long && lat) {
-    queryText += ' WHERE location = ST_MakePoint($1, $2)';
+    queryText += ' WHERE events.location = ST_MakePoint($1, $2)';
     queryParams.push(long, lat);
   }
   // PGSQL Limit null === No limit
   if (limit) {
-    queryText += ' LIMIT $3';
+    queryText += ' LIMIT $3;';
     queryParams.push(limit);
   }
 
   try {
     const { rows } = await db.query(queryText, queryParams);
 
-    res.status(200).json({ success: true, data: rows });
+    res.status(200).json({ success: true, events: rows });
   } catch (error) {
     console.log(error);
     res.status(500).json({ success: false, error });

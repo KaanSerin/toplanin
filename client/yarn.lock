@@ -7936,6 +7936,11 @@
   "resolved" "https://registry.yarnpkg.com/mkdirp/-/mkdirp-1.0.4.tgz"
   "version" "1.0.4"
 
+"monent@^2.0.0":
+  "integrity" "sha512-wvFMbaxgki1j+bpWyL8S6Ea7IM/Q7QTDjLFZLdZVmlJhlV5u/+/zYaxG37zlzaonb60Y5vjXlxVtoSR98hwjVQ=="
+  "resolved" "https://registry.npmjs.org/monent/-/monent-2.0.0.tgz"
+  "version" "2.0.0"
+
 "move-concurrently@^1.0.1":
   "integrity" "sha1-viwAX9oy4LKa8fBdfEszIUxwH5I="
   "resolved" "https://registry.yarnpkg.com/move-concurrently/-/move-concurrently-1.0.1.tgz"
