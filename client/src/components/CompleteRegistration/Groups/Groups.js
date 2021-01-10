@@ -1,10 +1,11 @@
 import React, { useState, useEffect } from 'react';
 import { withRouter } from 'react-router-dom';
+import { connect } from 'react-redux';
 import classes from './Groups.module.scss';
 import axios from 'axios';
 import GroupModal from './GroupModal/GroupModal';
 
-const Groups = ({ history }) => {
+const Groups = ({ history, updateGroups }) => {
   const [groups, setGroups] = useState([]);
   const [selectedGroup, setSelectedGroup] = useState(null);
   const [showGroupModal, setShowGroupModal] = useState(false);
@@ -37,6 +38,7 @@ const Groups = ({ history }) => {
   };
 
   const onClickNext = () => {
+    updateGroups(groups);
     history.push('/complete/events');
   };
 
@@ -88,4 +90,11 @@ const Groups = ({ history }) => {
   );
 };
 
-export default withRouter(Groups);
+const mapDispatchToProps = (dispatch) => {
+  return {
+    updateGroups: (groups) =>
+      dispatch({ type: 'registration/updateGroups', payload: groups }),
+  };
+};
+
+export default connect(null, mapDispatchToProps)(withRouter(Groups));

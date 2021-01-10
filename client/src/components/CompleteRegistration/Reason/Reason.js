@@ -1,5 +1,6 @@
 import React from 'react';
 import { withRouter } from 'react-router-dom';
+import { connect } from 'react-redux';
 import classes from './Reason.module.css';
 
 const Reason = ({ setReason, history }) => {
@@ -36,4 +37,11 @@ const Reason = ({ setReason, history }) => {
   );
 };
 
-export default withRouter(Reason);
+const mapDispatchToProps = (dispatch) => {
+  return {
+    setReason: (reason) =>
+      dispatch({ type: 'registration/updateReason', payload: reason }),
+  };
+};
+
+export default connect(null, mapDispatchToProps)(withRouter(Reason));

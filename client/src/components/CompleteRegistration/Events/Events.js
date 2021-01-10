@@ -1,8 +1,10 @@
 import React, { useState, useEffect } from 'react';
+import { withRouter } from 'react-router-dom';
+import { connect } from 'react-redux';
 import axios from 'axios';
 import classes from './Events.module.scss';
 
-const Events = ({ event }) => {
+const Events = ({ event, registration }) => {
   const [events, setEvents] = useState([]);
 
   useEffect(() => {
@@ -18,6 +20,19 @@ const Events = ({ event }) => {
 
     fetchEventData();
   }, []);
+
+  const completeRegistration = async () => {
+    try {
+      const res = await axios.post(
+        'http://localhost:5000/api/auth/register/complete',
+        registration
+      );
+
+      console.log(res);
+    } catch (error) {
+      console.log(error);
+    }
+  };
 
   return (
     <div className={classes.Events}>
@@ -50,8 +65,12 @@ const Events = ({ event }) => {
           </div>
         ))}
       </div>
+
+      <button>Next</button>
     </div>
   );
 };
 
-export default Events;
+const mapStateToProps = (state) => ({ registration: state.registration });
+
+export default connect(mapStateToProps)(withRouter(Events));

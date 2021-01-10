@@ -39,6 +39,7 @@
 
 .Inputs{
     display: flex;
+    align-items: center;
     flex-grow: 1;
 }
 
@@ -50,6 +51,7 @@
     padding: 14px 8px;
     flex-grow: 1;
     display: flex;
+    height: 50px;
 }
 .Inputs .Keywords input{
     margin-left: 4px;
@@ -68,6 +70,7 @@
     border-bottom-right-radius: 8px;
     padding: 14px 8px;
     width: 282px;
+    height: 50px;
     display: flex;
 }
 .Inputs .Location input{

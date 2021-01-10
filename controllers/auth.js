@@ -50,7 +50,7 @@ exports.register = async (req, res) => {
     res.cookie('auth', token);
 
     sendMail(email, 'Confirm Account', 'auth/register/confirm', token);
-    return res.status(200).json({ success: true });
+    return res.status(200).json({ success: true, token });
   } catch (error) {
     console.log(error);
     if (+error.code === 23505) {

@@ -12,17 +12,9 @@ import Welcome from './Welcome/Welcome';
 const CompleteRegistration = () => {
   let match = useRouteMatch();
 
-  const [avatar, setAvatar] = useState(null);
-  const [reason, setReason] = useState(null);
   const [interests, setInterests] = useState(null);
   const [topics, setTopics] = useState(null);
   const [groups, setGroups] = useState(null);
-
-  // Will process the avatar inside the function
-  const onAvatarUpload = (avatar) => {
-    // avatar is a base64 file
-    setAvatar(avatar);
-  };
 
   return (
     <Fragment>
@@ -33,37 +25,12 @@ const CompleteRegistration = () => {
       </nav>
       <div className={classes.Main}>
         <Switch>
-          <Route
-            path={`${match.path}/reason`}
-            render={(props) => <Reason {...props} setReason={setReason} />}
-          />
-          <Route
-            path={`${match.path}/interests`}
-            render={(props) => (
-              <Interests {...props} setInterests={setInterests} />
-            )}
-          />
-          <Route
-            path={`${match.path}/topics`}
-            render={(props) => (
-              <Topics
-                {...props}
-                interests={interests}
-                onSetTopics={setTopics}
-              />
-            )}
-          />
-          <Route
-            path={`${match.path}/groups`}
-            render={(props) => <Groups setGroups={setGroups} />}
-          />
+          <Route path={`${match.path}/reason`} component={Reason} />
+          <Route path={`${match.path}/interests`} component={Interests} />
+          <Route path={`${match.path}/topics`} component={Topics} />
+          <Route path={`${match.path}/groups`} component={Groups} />
           <Route path={`${match.path}/events`} render={(props) => <Events />} />
-          <Route
-            path={`${match.path}/`}
-            render={(props) => (
-              <Welcome {...props} setAvatar={onAvatarUpload} />
-            )}
-          />
+          <Route path={`${match.path}/`} component={Welcome} />
         </Switch>
       </div>
     </Fragment>

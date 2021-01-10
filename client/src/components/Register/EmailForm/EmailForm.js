@@ -24,8 +24,8 @@ const EmailForm = withRouter(({ history }) => {
       setUserLocation({
         country: user_data.location.country,
         name: user_data.location.city,
-        latitude: user_data.location.latitude,
-        longitude: user_data.location.longitude,
+        lat: user_data.location.latitude,
+        lng: user_data.location.longitude,
       });
     }
   }, []);
@@ -49,7 +49,7 @@ const EmailForm = withRouter(({ history }) => {
       name,
       email,
       password,
-      location: `${userLocation.latitude}, ${userLocation.longitude}`,
+      location: `${userLocation.lat}, ${userLocation.lng}`,
     };
 
     console.log(newUser);
@@ -59,7 +59,7 @@ const EmailForm = withRouter(({ history }) => {
         'http://localhost:5000/api/auth/register',
         newUser
       );
-
+      localStorage.setItem('auth_token', res.data.token);
       console.log(res);
 
       if (res.data.success && res.data.success === true)

@@ -1,12 +1,13 @@
 import React, { useState, useEffect } from 'react';
 import { withRouter } from 'react-router-dom';
+import { connect } from 'react-redux';
 import { v4 as uuidv4 } from 'uuid';
 import axios from 'axios';
 import classes from './Topics.module.css';
 import CustomCheckmark from '../../../CustomCheckmark/CustomCheckmark';
 import ExtraTopics from './ExtraTopics/ExtraTopics';
 
-const Topics = ({ history, interests, onSetTopics }) => {
+const Topics = ({ history, interests, updateTopics }) => {
   const [topics, setTopics] = useState([]);
   const [topicsExtra, setTopicsExtra] = useState([]);
 
@@ -75,7 +76,7 @@ const Topics = ({ history, interests, onSetTopics }) => {
       ...topicsExtra.map((te) => te.title),
     ];
 
-    onSetTopics(newTopics);
+    updateTopics(newTopics);
 
     history.push('/complete/groups');
   };
@@ -123,4 +124,14 @@ const Topics = ({ history, interests, onSetTopics }) => {
   );
 };
 
-export default withRouter(Topics);
+const mapDispatchToProps = (dispatch) => {
+  return {
+    updateTopics: (topics) =>
+      dispatch({ type: 'registration/updateTopics', payload: topics }),
+  };
+};
+const mapStateToProps = (state) => ({
+  interests: state.registration.interests,
+});
+
+export default connect(mapStateToProps, mapDispatchToProps)(withRouter(Topics));

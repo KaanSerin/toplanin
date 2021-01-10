@@ -18,6 +18,30 @@
         font-size: 1.03175rem;
         font-weight: 500;
     }
+
+    button{
+        margin: 38px 0 14px 0;
+    
+        height: 42px;
+        width: 100%;
+        
+        background: white;
+    
+        border: 1px solid #0098ab;
+        border-radius: 8px;
+    
+        color: #0098ab;
+        font-size: 0.875rem;
+        font-weight: 900;
+    
+        transition: 0.2s all;
+    
+        &:hover{
+            cursor: pointer;
+            background: #0098ab;
+            color: white;
+        }
+    }
 }
 
 .EventsList{

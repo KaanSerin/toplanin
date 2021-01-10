@@ -1,5 +1,6 @@
 import React, { useState, useEffect } from 'react';
 import { withRouter } from 'react-router-dom';
+import { connect } from 'react-redux';
 import classes from './Interests.module.css';
 import axios from 'axios';
 
@@ -66,4 +67,11 @@ const Interests = ({ setInterests, history }) => {
   );
 };
 
-export default withRouter(Interests);
+const mapDispatchToProps = (dispatch) => {
+  return {
+    setInterests: (interests) =>
+      dispatch({ type: 'registration/updateInterests', payload: interests }),
+  };
+};
+
+export default connect(null, mapDispatchToProps)(withRouter(Interests));

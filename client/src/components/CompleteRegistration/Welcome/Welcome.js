@@ -1,9 +1,12 @@
 import React, { useState, useRef } from 'react';
 import { withRouter, Link } from 'react-router-dom';
+import { connect } from 'react-redux';
+import { toBase64 } from '../../../utility';
+
 import Spinner from '../../Spinner/Spinner';
 import classes from './Welcome.module.css';
 
-const Welcome = ({ history, setAvatar }) => {
+const Welcome = ({ setAvatar, history }) => {
   const [isLoading, setIsLoading] = useState(false);
   const fileRef = useRef(null);
 
@@ -11,11 +14,10 @@ const Welcome = ({ history, setAvatar }) => {
     fileRef.current.click();
   };
 
-  const onFileUploaded = (e) => {
-    console.log(e.target.files);
-    const avatar = e.target.files[0];
-    setAvatar(avatar);
-
+  const onFileUploaded = async (e) => {
+    const file = e.target.files[0];
+    const image = await toBase64(file);
+    setAvatar(image);
     history.push('/complete/reason');
   };
 
@@ -50,4 +52,11 @@ const Welcome = ({ history, setAvatar }) => {
   );
 };
 
-export default withRouter(Welcome);
+const mapDispatchToProps = (dispatch) => {
+  return {
+    setAvatar: (image) =>
+      dispatch({ type: 'registration/updateAvatar', payload: image }),
+  };
+};
+
+export default connect(null, mapDispatchToProps)(withRouter(Welcome));
