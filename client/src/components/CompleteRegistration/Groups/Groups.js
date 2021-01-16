@@ -7,7 +7,7 @@ import GroupModal from './GroupModal/GroupModal';
 
 const Groups = ({ history, updateGroups }) => {
   const [groups, setGroups] = useState([]);
-  const [selectedGroup, setSelectedGroup] = useState(null);
+  const [selectedGroups, setSelectedGroups] = useState(null);
   const [showGroupModal, setShowGroupModal] = useState(false);
 
   useEffect(() => {
@@ -33,12 +33,12 @@ const Groups = ({ history, updateGroups }) => {
 
   const onClickGroup = (id) => {
     if (showGroupModal) return;
-    setSelectedGroup(groups.find((group) => group.group_id === id));
+    setSelectedGroups(groups.find((group) => group.group_id === id));
     setShowGroupModal(true);
   };
 
   const onClickNext = () => {
-    updateGroups(groups);
+    updateGroups(groups.filter((group) => group.joined));
     history.push('/complete/events');
   };
 
@@ -52,7 +52,7 @@ const Groups = ({ history, updateGroups }) => {
 
       {showGroupModal ? (
         <GroupModal
-          group={selectedGroup}
+          group={selectedGroups}
           onClickJoin={onClickJoinBtn}
           onClickClose={() => setShowGroupModal(false)}
         />

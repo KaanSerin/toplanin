@@ -170,16 +170,16 @@ exports.logout = (req, res) => {
 exports.completeRegistration = async (req, res) => {
   const errors = validationResult(req);
 
-  const { reason, interests, groups } = req.body;
+  const { avatar, reason, interests, groups } = req.body;
 
   if (errors.errors.length > 0) {
-    return res.status(400).json({ errors: errors.array() });
+    return res.status(200).json({ errors: errors.array() });
   }
 
   const token = req.cookies.auth;
 
   if (!token) {
-    return res.status(400).json({ success: false });
+    return res.status(200).json({ msg: 'no token', success: false });
   }
 
   const tokenParsed = jwt.verify(token, process.env.JWT_SECRET);
@@ -209,6 +209,13 @@ exports.completeRegistration = async (req, res) => {
         "UPDATE users SET completed = 'true', reason_join = $1, interests = $2, groups = $3 WHERE user_id = $4",
         [reason, interests, groups, tokenParsed.user_id]
       );
+
+      if (avatar) {
+        const data2 = await db.query(
+          'UPDATE user_avatars SET avatar = $1, WHERE user_id = $2',
+          [avatar, tokenParsed.user_id]
+        );
+      }
 
       return res.status(200).json({ success: true });
     }

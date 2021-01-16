@@ -1,14 +1,27 @@
-import React, { useState, useRef } from 'react';
+import React, { useState, useEffect, useRef } from 'react';
 import { withRouter, Link } from 'react-router-dom';
 import { connect } from 'react-redux';
 import { toBase64 } from '../../../utility';
-
+import axios from 'axios';
 import Spinner from '../../Spinner/Spinner';
 import classes from './Welcome.module.css';
 
 const Welcome = ({ setAvatar, history }) => {
   const [isLoading, setIsLoading] = useState(false);
   const fileRef = useRef(null);
+
+  useEffect(() => {
+    const confirmAccount = async () => {
+      const token = history.location.search.split('=')[1];
+
+      const res = await axios.get(
+        `http://localhost:5000/api/auth/register/confirm/${token}`
+      );
+      console.log(res);
+    };
+
+    confirmAccount();
+  }, []);
 
   const onClickUpload = () => {
     fileRef.current.click();

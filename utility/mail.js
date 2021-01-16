@@ -16,7 +16,7 @@ exports.sendMail = async (emailTo, subject, route, token) => {
     to: emailTo,
     subject: subject,
     text: 'Confirm Your Account!',
-    html: `<a href="http://localhost:3000/api/${route}/${token}">Click to confirm your account</a>`,
+    html: `<a href="http://localhost:3000/complete?token=${token}">Click to confirm your account</a>`,
   };
 
   await transporter.sendMail(mailOptions, function (error, info) {

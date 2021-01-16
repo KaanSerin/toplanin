@@ -1,4 +1,4 @@
-import React, { Fragment, useState } from 'react';
+import React, { Fragment } from 'react';
 import { useRouteMatch, Link, Switch, Route } from 'react-router-dom';
 import classes from './CompleteRegistration.module.css';
 import Events from './Events/Events';
@@ -11,10 +11,6 @@ import Welcome from './Welcome/Welcome';
 
 const CompleteRegistration = () => {
   let match = useRouteMatch();
-
-  const [interests, setInterests] = useState(null);
-  const [topics, setTopics] = useState(null);
-  const [groups, setGroups] = useState(null);
 
   return (
     <Fragment>
