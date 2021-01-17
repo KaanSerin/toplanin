@@ -63,7 +63,6 @@ const EmailForm = withRouter(({ history }) => {
           credentials: 'include',
         }
       );
-      localStorage.setItem('auth_token', res.data.token);
       console.log(res);
 
       if (res.data.success && res.data.success === true)

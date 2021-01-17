@@ -25,13 +25,18 @@ const Events = ({ event, registration }) => {
 
   const completeRegistration = async () => {
     try {
-      console.log(registration);
+      const data = {
+        ...registration,
+        interests: registration.interests.map(
+          (interest) => interest.category_id
+        ),
+        groups: registration.groups.map((group) => group.group_id),
+      };
+
       const res = await axios.post(
         'http://localhost:5000/api/auth/register/complete',
-        registration,
-        {
-          withCredentials: true,
-        }
+        data,
+        { withCredentials: true }
       );
 
       console.log(res);

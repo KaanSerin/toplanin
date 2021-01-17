@@ -37,6 +37,7 @@ const Interests = ({ setInterests, history }) => {
   const onClickNext = () => {
     setInterests(
       selectedInterests.filter((interest) => interest.selected === true)
+      // .map((interest) => interest.category_id)
     );
     history.push('/complete/topics');
   };
