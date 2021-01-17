@@ -122,7 +122,6 @@ exports.confirmAccount = async (req, res) => {
   const token = req.params.token;
 
   const tokenParsed = jwt.verify(token, process.env.JWT_SECRET);
-  console.log(tokenParsed);
 
   try {
     const {
@@ -146,6 +145,19 @@ exports.confirmAccount = async (req, res) => {
         "UPDATE users SET confirmed = 'true' WHERE user_id = $1",
         [tokenParsed.user_id]
       );
+
+      const token = jwt.sign(
+        { user_id: rows[0].user_id },
+        process.env.JWT_SECRET
+      );
+
+      res.cookie('auth', token, {
+        maxAge: 60 * 60 * 1000, // 1 hour
+        httpOnly: true,
+        secure: false,
+        sameSite: false,
+      });
+
       return res.status(200).json({ success: true });
     }
   } catch (error) {

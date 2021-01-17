@@ -4,7 +4,7 @@ import { connect } from 'react-redux';
 import axios from 'axios';
 import classes from './Events.module.scss';
 
-const Events = ({ event, registration }) => {
+const Events = ({ event, registration, history }) => {
   const [events, setEvents] = useState([]);
 
   useEffect(() => {
@@ -41,7 +41,7 @@ const Events = ({ event, registration }) => {
 
       console.log(res);
     } catch (error) {
-      console.log(error);
+      console.log(error.response.data);
     }
   };
 
@@ -77,7 +77,7 @@ const Events = ({ event, registration }) => {
         ))}
       </div>
 
-      <button>Next</button>
+      <button onClick={() => history.push('/')}>Next</button>
     </div>
   );
 };

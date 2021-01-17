@@ -14,10 +14,19 @@ const Welcome = ({ setAvatar, history }) => {
     const confirmAccount = async () => {
       const token = history.location.search.split('=')[1];
 
-      const res = await axios.get(
-        `http://localhost:5000/api/auth/register/confirm/${token}`
-      );
-      console.log(res);
+      try {
+        const res = await axios.get(
+          `http://localhost:5000/api/auth/register/confirm/${token}`,
+          { withCredentials: true }
+        );
+
+        if (!res.data.success) {
+          history.push('/');
+        }
+      } catch (error) {
+        console.log(error.response.data.msg);
+        history.push('/');
+      }
     };
 
     confirmAccount();
