@@ -15,7 +15,7 @@ const events = require('./routes/events');
 
 const app = express();
 
-app.use(cors());
+app.use(cors({ origin: 'http://localhost:3000', credentials: true }));
 
 // Load Environment Variables
 dotenv.config({ path: './config/config.env' });

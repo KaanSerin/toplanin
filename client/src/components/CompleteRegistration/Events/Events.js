@@ -15,8 +15,6 @@ const Events = ({ event, registration }) => {
         'http://localhost:5000/api/events?long=28.9744&lat=41.0177&limit=1'
       );
 
-      console.log(res);
-
       setEvents(res.data.events);
     };
 
@@ -31,7 +29,9 @@ const Events = ({ event, registration }) => {
       const res = await axios.post(
         'http://localhost:5000/api/auth/register/complete',
         registration,
-        { withCredentials: true }
+        {
+          withCredentials: true,
+        }
       );
 
       console.log(res);

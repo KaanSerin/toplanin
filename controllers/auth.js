@@ -47,9 +47,14 @@ exports.register = async (req, res) => {
       process.env.JWT_SECRET
     );
 
-    res.cookie('auth', token);
-
     sendMail(email, 'Confirm Account', 'auth/register/confirm', token);
+    res.cookie('auth', token, {
+      maxAge: 60 * 60 * 1000, // 1 hour
+      httpOnly: true,
+      secure: false,
+      sameSite: false,
+    });
+
     return res.status(200).json({ success: true, token });
   } catch (error) {
     console.log(error);
@@ -212,7 +217,7 @@ exports.completeRegistration = async (req, res) => {
 
       if (avatar) {
         const data2 = await db.query(
-          'UPDATE user_avatars SET avatar = $1, WHERE user_id = $2',
+          'UPDATE user_avatars SET avatar = $1 WHERE user_id = $2',
           [avatar, tokenParsed.user_id]
         );
       }

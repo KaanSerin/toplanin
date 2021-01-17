@@ -3,10 +3,7 @@ import { withRouter } from 'react-router-dom';
 import classes from '../Register.module.css';
 import ReCAPTCHA from 'react-google-recaptcha';
 import LocationSearch from './LocationSearch';
-import Cookies from 'universal-cookie';
 import axios from 'axios';
-
-const cookies = new Cookies();
 
 const EmailForm = withRouter(({ history }) => {
   const [name, setName] = useState('');
@@ -60,10 +57,13 @@ const EmailForm = withRouter(({ history }) => {
     try {
       const res = await axios.post(
         'http://localhost:5000/api/auth/register',
-        newUser
+        newUser,
+        {
+          withCredentials: true,
+          credentials: 'include',
+        }
       );
       localStorage.setItem('auth_token', res.data.token);
-      cookies.set('auth', res.data.token);
       console.log(res);
 
       if (res.data.success && res.data.success === true)
